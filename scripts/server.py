@@ -25,8 +25,8 @@ import pandas as pd
 import tensorflow as tf
 from text_cnn_rnn import TextCNNRNN
 
-UPLOAD_FOLDER = './uploads'
-ALLOWED_EXTENSIONS = set(['txt', 'csv', 'json'])
+UPLOAD_FOLDER = './shared/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'tsv','csv', 'json', 'yaml', 'yml', 'toml', 'ini'])
 
 # https://github.com/kashyapakshay/BuzzKill/blob/master/server.py
 # https://github.com/eagle705/Explain_DeepLearning_LIME/blob/master/index.py
@@ -174,7 +174,7 @@ def predict_unseen_data():
 		y_test = np.asarray(y_)
 
 	timestamp = trained_dir.split('/')[-2].split('_')[-1]
-	predicted_dir = './predicted_results_' + timestamp + '/'
+	predicted_dir = './shared/results/latest/sf-crime/predicted_results_' + timestamp + '/'
 	if os.path.exists(predicted_dir):
 		shutil.rmtree(predicted_dir)
 	os.makedirs(predicted_dir)
@@ -236,6 +236,7 @@ def predict_unseen_data():
 			logging.critical('Prediction is complete, all files have been saved: {}'.format(predicted_dir))
 
 if __name__ == '__main__':
-	# python3 predict.py ./trained_results_1478563595/ ./data/small_samples.csv
+	# python3 predict.py ./shared/results/latest/sf-crime/trained_results_1478563595/ ./shared/data/sf-crime/dataset/small_samples.csv
 	# predict_unseen_data()
     app.run(debug=True)
+

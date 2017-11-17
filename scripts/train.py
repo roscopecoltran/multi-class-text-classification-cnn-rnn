@@ -37,7 +37,7 @@ def train_cnn_rnn():
 
 	# Create a directory, everything related to the training will be saved in this directory
 	timestamp = str(int(time.time()))
-	trained_dir = './trained_results_' + timestamp + '/'
+	trained_dir = './shared/results/latest/sf-crime/trained_results_' + timestamp + '/'
 	if os.path.exists(trained_dir):
 		shutil.rmtree(trained_dir)
 	os.makedirs(trained_dir)
