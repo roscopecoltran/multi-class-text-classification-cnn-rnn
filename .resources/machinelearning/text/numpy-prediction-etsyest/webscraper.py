@@ -166,6 +166,8 @@ def findandrecordsuccess(fileurls, filefavs, cutoff):
 	filein.close()
 	fileout.close()
 
-#findandrecordetsydata(1000,200,'Desktop\\etsyestdata\\toptags.txt','Desktop\\etsyestdata\\urls.txt','Desktop\\etsyestdata\\tags.txt','Desktop\\etsyestdata\\successes.txt',20)
-#findandrecordtestset(200, 'Desktop\\etsyestdata\\toptags.txt', 'Desktop\\etsyestdata\\urlstest.txt', 'Desktop\\etsyestdata\\tagstest.txt','Desktop\\etsyestdata\\favsstest.txt',20)
-findandrecordsuccess('Desktop\\etsyestdata\\urlstest.txt','Desktop\\etsyestdata\\favsstest.txt',20)
+#findandrecordetsydata(1000,200,'toptags.txt','urls.txt','tags.txt','successes.txt',20)
+#findandrecordtestset(200, 'toptags.txt', 'urlstest.txt', 'tagstest.txt','favsstest.txt',20)
+findandrecordsuccess('urlstest.txt','favsstest.txt',20)
+
+

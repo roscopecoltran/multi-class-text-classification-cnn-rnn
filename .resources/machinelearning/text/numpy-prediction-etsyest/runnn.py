@@ -23,7 +23,7 @@ def filestoarrays(filenameX, filenameY):
 	return X, Y
 	
 
-X, Y = filestoarrays('Desktop\\etsyest\\tags.txt', 'Desktop\\etsyest\\favs.txt')
+X, Y = filestoarrays('tags.txt', 'favs.txt')
 layerdims = [X.shape[0],5,1]
 layerfunctions = ["relu","sigmoid"]
 parameters = nn.neuralnet(X,Y,layerdims,layerfunctions,6000, .1)

@@ -91,3 +91,4 @@ class TF_IDF(object):
                 output_string = ' '.join(named_scores)
                 print('post-processing {} of {} documents with TF-IDF scores.'.format(doc_id + 1, n), flush=True)
                 yield output_string
+
