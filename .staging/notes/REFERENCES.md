@@ -33,10 +33,12 @@ https://github.com/imgoodman/kaggle-spark-ml
 https://github.com/imgoodman/machine-learning-with-spark
 https://github.com/daxiongshu/tradeshift-text-classification / https://www.kaggle.com/c/tradeshift-text-classification/data
 
+# video games
+https://github.com/llSourcell/AI_for_video_games_demo
 
 # chatbots
 https://github.com/carpedm20/fbchat
-
+https://github.com/llSourcell/tensorflow_chatbot
 
 # frameworks
 https://github.com/facebookresearch/fastText
@@ -79,6 +81,7 @@ https://github.com/carpedm20/neural-summary-tensorflow
 
 # object detection
 https://github.com/xiaolonw/adversarial-frcnn
+https://github.com/llSourcell/YOLO_Object_Detection
 
 # bounding boxes
 https://github.com/smallcorgi/3D-Deepbox (https://arxiv.org/pdf/1612.00496.pdf)
