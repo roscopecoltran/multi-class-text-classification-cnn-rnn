@@ -1,5 +1,5 @@
 FROM alpine:3.6
-MAINTAINER Rosco Pecoltran <https://github.com/roscopeoltran>
+MAINTAINER Rosco Pecoltran <https://github.com/roscopecoltran>
 
 # Buidl arguments
 ARG GOSU_VERSION=${GOSU_VERSION:-"1.10"}
