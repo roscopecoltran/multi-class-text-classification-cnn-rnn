@@ -10,12 +10,13 @@ https://github.com/carpedm20/awesome-hacking
 https://github.com/tdeboissiere/DeepLearningImplementations
 
 
-# tutorials
+# tutorials/workshops
 https://github.com/aymericdamien/TensorFlow-Examples/tree/master/examples
 https://github.com/ujjwalkarn/Machine-Learning-Tutorials
 https://github.com/adornes/spark_python_ml_examples
 https://github.com/ischlag/distributed-tensorflow-example
 https://github.com/mnielsen/neural-networks-and-deep-learning
+https://github.com/minggli/python-ml
 
 
 # producitvity 
@@ -32,6 +33,7 @@ https://github.com/tensorflow/models
 https://github.com/imgoodman/kaggle-spark-ml
 https://github.com/imgoodman/machine-learning-with-spark
 https://github.com/daxiongshu/tradeshift-text-classification / https://www.kaggle.com/c/tradeshift-text-classification/data
+https://github.com/minggli/fisheries-convnet
 
 # video games
 https://github.com/llSourcell/AI_for_video_games_demo
@@ -39,6 +41,7 @@ https://github.com/llSourcell/AI_for_video_games_demo
 # chatbots
 https://github.com/carpedm20/fbchat
 https://github.com/llSourcell/tensorflow_chatbot
+https://github.com/minggli/chatbot (doctor)
 
 # frameworks
 https://github.com/facebookresearch/fastText
@@ -60,7 +63,7 @@ https://github.com/dennybritz/cnn-text-classification-tf
 https://github.com/yoonkim/CNN_sentence
 https://github.com/smallcorgi/Faster-RCNN_TF
 https://github.com/endernewton/subdiscover
-
+https://github.com/minggli/DenseNet
 
 # Deep Reinforcement Learning
 https://github.com/carpedm20/deep-rl-tensorflow
@@ -75,9 +78,14 @@ https://github.com/carpedm20/DiscoGAN-pytorch
 # document classification
 Hierarchical Attention Networks for Document Classification: https://github.com/raviqqe/tensorflow-font2char2word2sent2doc 
 
+# success prediction
+https://github.com/mbulkow/etsyest
 
 # document summary
 https://github.com/carpedm20/neural-summary-tensorflow
+
+# computer vision
+https://github.com/minggli/rainforest-tagging
 
 # object detection
 https://github.com/xiaolonw/adversarial-frcnn
