@@ -42,12 +42,12 @@ git subtree add --prefix .resources/machinelearning/text/numpy-prediction-etsyes
 
 ## Tensorflow - Text Classification
 git subtree add --prefix .resources/deeplearning/text/gaussic/text-classification-cnn-rnn \
-	https://github.com/gaussic/text-classification-cnn-rnn \ 
+	https://github.com/gaussic/text-classification-cnn-rnn \
 	--squash master
 
 ## Tensorflow - Text Classification
 git subtree add --prefix .resources/deeplearning/text/yxtay/text-classification-tensorflow \
-	https://github.com/yxtay/text-classification-tensorflow \ 
+	https://github.com/yxtay/text-classification-tensorflow \
 	--squash master
 
 ## Magpie - Multi-Label Classification
