@@ -1,4 +1,4 @@
-### Project: Classify Kaggle San Francisco Crime Description
+## Project: Classify Kaggle San Francisco Crime Description
 
 ### Highlights:
   - This is a **multi-class text classification (sentence classification)** problem.
@@ -25,6 +25,22 @@
 ### Predict:
   - Command: python3 predict.py ./trained_results_dir/ new_data.csv
   - Example: ```python3 predict.py ./trained_results_1478563595/ ./data/small_samples.csv```
-  
+
 ### Reference:
- - [Implement a cnn for text classification in tensorflow](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/)
+ - [Implement a cnn for text classification in tensorflow](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/)  
+
+## Docker 
+
+### Docker Compose Example
+======================
+
+This is Docker Compose example. You can boot a container based on this
+repository image with Jupyter port 8888, its password 'foobar' and sharing
+files in `notebook` directory with the container by just running
+
+```shellsession
+docker-compose up
+```
+
+To stop it, please press 'Ctrl-C'.
+

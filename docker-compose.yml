@@ -1,0 +1,19 @@
+version: '2'
+services:
+
+  tensorflow_server:
+    image: alpine-py3-tensorflow-server:latest
+    ports:
+      - 8888:8888
+    volumes:
+      - ./shared/conf.d:/app/conf.d
+      - ./shared/results/latest:/app/results
+
+  tensorflow_jupyter:
+    image: alpine-py3-tensorflow-jupyter:latest
+    ports:
+      - 8888:8888
+    volumes:
+      - ./shared/notebook:/root/notebook/my_notes
+    environment:
+      - PASSWORD=foobar
