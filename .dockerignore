@@ -1,3 +1,7 @@
+## Env files
+.env-example
+*.md
+
 ## Temporary workspaces
 shared/results/archived
 shared/results/archived/

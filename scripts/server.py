@@ -1,5 +1,4 @@
 ##!flask/bin/python3
-#!/usr/bin/env python3
 
 # urls:
 # - http://127.0.0.1:5000/classify?query=who+are+you
@@ -230,7 +229,8 @@ def predict_unseen_data():
 			logging.critical('Prediction is complete, all files have been saved: {}'.format(predicted_dir))
 
 if __name__ == '__main__':
-	# python3 predict.py ./shared/results/latest/sf-crime/trained_results_1478563595/ ./shared/data/sf-crime/dataset/small_samples.csv
+	# $ python3 server.py ./shared/results/latest/sf-crime/trained_results_1478563595/ ./shared/data/sf-crime/dataset/small_samples.csv
+	# 	or 
+	# $ server.py ./shared/results/latest/sf-crime/trained_results_1478563595/ ./shared/data/sf-crime/dataset/small_samples.csv
 	# predict_unseen_data()
     app.run(debug=True)
-
