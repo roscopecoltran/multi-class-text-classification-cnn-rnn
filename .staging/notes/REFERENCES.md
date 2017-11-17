@@ -80,6 +80,8 @@ https://github.com/carpedm20/DiscoGAN-pytorch
 Hierarchical Attention Networks for Document Classification: https://github.com/raviqqe/tensorflow-font2char2word2sent2doc 
 https://github.com/fendouai?tab=repositories
 https://github.com/gaussic/text-classification-cnn-rnn
+https://github.com/gaussic/text-classification-pytorch
+https://github.com/yxtay/text-classification-tensorflow
 
 # success prediction
 https://github.com/mbulkow/etsyest
@@ -105,4 +107,6 @@ https://github.com/smizy/**
 https://github.com/roscopecoltran/sniperkit-services/tree/develop/dockerfiles/machine-learning
 https://github.com/ambodi/pyspark-twitter-stream-mining
 https://github.com/endernewton/tf-faster-rcnn
+https://github.com/inspirehep/inspire-docker
+https://github.com/inspirehep/inspire-next
 
