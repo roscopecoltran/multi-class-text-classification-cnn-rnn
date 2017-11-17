@@ -40,3 +40,7 @@ git subtree add --prefix .resources/machinelearning/text/numpy-prediction-etsyes
 	https://github.com/mbulkow/etsyest \
 	--squash master
 
+## Tensorflow - Text Classification
+git subtree add --prefix .resources/deeplearning/text/gaussic/text-classification-cnn-rnn \
+	https://github.com/gaussic/text-classification-cnn-rnn \ 
+	--squash master

@@ -8,7 +8,8 @@ https://github.com/elastic/elasticsearch-definitive-guide
 https://github.com/songrotek/Deep-Learning-Papers-Reading-Roadmap
 https://github.com/carpedm20/awesome-hacking
 https://github.com/tdeboissiere/DeepLearningImplementations
-
+https://github.com/Hironsan/awesome-text-classification
+https://github.com/fendouai/Awesome-Text-Classification
 
 # tutorials/workshops
 https://github.com/aymericdamien/TensorFlow-Examples/tree/master/examples
@@ -77,6 +78,8 @@ https://github.com/carpedm20/DiscoGAN-pytorch
 
 # document classification
 Hierarchical Attention Networks for Document Classification: https://github.com/raviqqe/tensorflow-font2char2word2sent2doc 
+https://github.com/fendouai?tab=repositories
+https://github.com/gaussic/text-classification-cnn-rnn
 
 # success prediction
 https://github.com/mbulkow/etsyest
