@@ -29,3 +29,14 @@ git subtree add --prefix .resources/deeplearning/text/entity-recognition/tensorf
 git subtree add --prefix .resources/deeplearning/learn-reinforcement/deep-rl-tensorflow \
 	https://github.com/carpedm20/deep-rl-tensorflow \
 	--squash master
+
+## SpaCy - Tags Prediction
+git subtree add --prefix .resources/machinelearning/text/minggli/tags-prediction \
+	https://github.com/minggli/tags-prediction \
+	--squash master
+
+## Numpy - Product Success Prediction
+git subtree add --prefix .resources/machinelearning/text/numpy-prediction-etsyest \
+	https://github.com/mbulkow/etsyest \
+	--squash master
+
