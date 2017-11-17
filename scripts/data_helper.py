@@ -84,7 +84,7 @@ def batch_iter(data, batch_size, num_epochs, shuffle=True):
 
 def load_data(filename):
 	df = pd.read_csv(filename, compression='zip')
-	selected = ['Category', 'Descript']
+	selected = ['Category', 'Description']
 	non_selected = list(set(df.columns) - set(selected))
 
 	df = df.drop(non_selected, axis=1)
@@ -108,5 +108,5 @@ def load_data(filename):
 	return x, y, vocabulary, vocabulary_inv, df, labels
 
 if __name__ == "__main__":
-	train_file = './shared/data/sf-crime/dataset/train.csv.zip'
+	train_file = './shared/data/sf-crimes/dataset/train.csv.zip'
 	load_data(train_file)

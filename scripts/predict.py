@@ -31,6 +31,9 @@ def load_test_data(test_file, labels):
 	test_examples = df[select[0]].apply(lambda x: data_helper.clean_str(x).split(' ')).tolist()
 
 	num_labels = len(labels)
+	logging.info('labels: {}'.format(labels))
+	logging.info('num_labels: {}'.format(num_labels))
+	
 	one_hot = np.zeros((num_labels, num_labels), int)
 	np.fill_diagonal(one_hot, 1)
 	label_dict = dict(zip(labels, one_hot))
@@ -72,11 +75,13 @@ def predict_unseen_data():
 		y_test = np.asarray(y_)
 
 	timestamp = trained_dir.split('/')[-2].split('_')[-1]
-	predicted_dir = './shared/results/latest/sf-crime/predicted_' + timestamp + '/'
+	predicted_dir = './shared/results/latest/sf-crimes/predicted_' + timestamp + '/'
 	if os.path.exists(predicted_dir):
 		shutil.rmtree(predicted_dir)
 	os.makedirs(predicted_dir)
 
+	# refs.
+	# - https://stackoverflow.com/questions/33759623/tensorflow-how-to-save-restore-a-model
 	with tf.Graph().as_default():
 		session_conf = tf.ConfigProto(allow_soft_placement=True, log_device_placement=False)
 		sess = tf.Session(config=session_conf)
@@ -111,7 +116,7 @@ def predict_unseen_data():
 			saver = tf.train.Saver(tf.all_variables())
 			saver = tf.train.import_meta_graph("{}.meta".format(checkpoint_file))
 			saver.restore(sess, checkpoint_file)
-			logging.critical('{} has been loaded'.format(checkpoint_file))
+			logging.info('{} has been loaded'.format(checkpoint_file))
 
 			batches = data_helper.batch_iter(list(x_test), params['batch_size'], 1, shuffle=False)
 
@@ -134,5 +139,5 @@ def predict_unseen_data():
 			logging.critical('Prediction is complete, all files have been saved: {}'.format(predicted_dir))
 
 if __name__ == '__main__':
-	# python3 predict.py ./shared/results/latest/sf-crime/trained ./shared/data/sf-crime/dataset/small_samples.csv
+	# python3 predict.py ./shared/results/latest/sf-crimes/trained ./shared/data/sf-crimes/dataset/small_samples.csv
 	predict_unseen_data()

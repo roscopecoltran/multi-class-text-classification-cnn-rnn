@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import fasttext
 import gensim
 import numpy
@@ -8,9 +9,10 @@ import os
 import operator
 import collections
 
+# ref. 
+# pip3 install gensim fasttext flask spacy
 
 app = flask.Flask(__name__)
-
 
 def file_exists(x):
     if not os.path.isfile(x):

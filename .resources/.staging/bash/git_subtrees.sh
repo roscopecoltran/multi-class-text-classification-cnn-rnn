@@ -59,3 +59,8 @@ git subtree add --prefix .resources/deeplearning/inspirehep/magpie \
 git subtree add --prefix .resources/deeplearning/TobiasLee/Text-Classification-DBpedia \
 	https://github.com/TobiasLee/Text-Classification \
 	--squash master
+
+## General - Text Classification
+git subtree add --prefix .resources/deeplearning/text/brightmart/text_classification \
+	https://github.com/brightmart/text_classification \
+	--squash master

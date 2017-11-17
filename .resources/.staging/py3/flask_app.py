@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 import requests
 import json
 from flask import Flask, request

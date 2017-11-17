@@ -9,8 +9,8 @@ import time
 
 names = ["class", "title", "content"]
 
-test_csv = pd.read_csv("./dbpedia_data/dbpedia_csv/test.csv", names=names)
-train_csv = pd.read_csv("./dbpedia_data/dbpedia_csv/train.csv", names=names)
+test_csv = pd.read_csv("./shared/results/latest/dbpedia/alstm_hierarchical/test.csv", names=names)
+train_csv = pd.read_csv("./shared/results/latest/dbpedia/alstm_hierarchical/train.csv", names=names)
 MAX_LABEL = 15
 
 shuffle_csv = train_csv.sample(frac=1)
