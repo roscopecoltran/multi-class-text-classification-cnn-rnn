@@ -1,7 +1,15 @@
-## Staging workspaces
-shared/experimental/archived
-shared/experimental/archived/
-shared/experimental/archived/**
+## Temporary workspaces
+shared/results/archived
+shared/results/archived/
+shared/results/archived/**
+
+.resources
+.resources/
+.resources/**
+
+.staging
+.staging/
+.staging/**
 
 ## Python
 
