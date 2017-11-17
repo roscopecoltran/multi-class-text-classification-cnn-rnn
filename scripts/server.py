@@ -1,15 +1,22 @@
 ##!flask/bin/python3
+#!/usr/bin/env python3
 
-#
-# ===========Guidelines for Usama================
-#	comment one # from first line if you are to run it as executable i.e ./app.py
-#   otherwise python app.py should be fine.
-#	JSON file is just dumped there from ... http://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
-#	Image upload works fine, check the myclassify() function it is the view function
-#	I left work incomplete. Pull request me on this one... 
+# urls:
+# - http://127.0.0.1:5000/classify?query=who+are+you
+# - http://127.0.0.1:5000/api/v1.0/classifier?q=who+are+you
 
-# http://127.0.0.1:5000/classify?query=who+are+you
-# http://127.0.0.1:5000/api/v1.0/classifier?q=who+are+you
+# refs:
+# https://github.com/kashyapakshay/BuzzKill/blob/master/server.py
+# https://github.com/eagle705/Explain_DeepLearning_LIME/blob/master/index.py
+# https://github.com/eagle705/Explain_DeepLearning_LIME/blob/master/RNN_Flask.py
+# https://github.com/eagle705/Explain_DeepLearning_LIME/blob/master/CNN_Flask.py
+# https://github.com/RRisto/krattbot/blob/master/flask_app.py
+# https://github.com/bogdanned/charles/blob/master/app_platon/app/index.py
+# https://github.com/scottming/EmbeddingCNNintoWeb/blob/master/py/app.py
+# https://github.com/eBay/Sequence-Semantic-Embedding
+# https://github.com/PrasenjitGiri/TensorflowFlaskApp/blob/master/server.py
+# https://github.com/SeldonIO/seldon-server/blob/master/python/examples/doc_similarity_api.ipynb
+# https://github.com/liuzqt/keyword_spotting/blob/master/server_demo.py
 
 import os
 from flask import Flask , jsonify, request, redirect, url_for, send_from_directory
@@ -27,19 +34,6 @@ from text_cnn_rnn import TextCNNRNN
 
 UPLOAD_FOLDER = './shared/uploads'
 ALLOWED_EXTENSIONS = set(['txt', 'tsv','csv', 'json', 'yaml', 'yml', 'toml', 'ini'])
-
-# https://github.com/kashyapakshay/BuzzKill/blob/master/server.py
-# https://github.com/eagle705/Explain_DeepLearning_LIME/blob/master/index.py
-# https://github.com/eagle705/Explain_DeepLearning_LIME/blob/master/RNN_Flask.py
-# https://github.com/eagle705/Explain_DeepLearning_LIME/blob/master/CNN_Flask.py
-# https://github.com/RRisto/krattbot/blob/master/flask_app.py
-# https://github.com/bogdanned/charles/blob/master/app_platon/app/index.py
-# https://github.com/scottming/EmbeddingCNNintoWeb/blob/master/py/app.py
-# https://github.com/eBay/Sequence-Semantic-Embedding
-# https://github.com/PrasenjitGiri/TensorflowFlaskApp/blob/master/server.py
-# https://github.com/SeldonIO/seldon-server/blob/master/python/examples/doc_similarity_api.ipynb
-# https://github.com/liuzqt/keyword_spotting/blob/master/server_demo.py
-# 
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
