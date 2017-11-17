@@ -1,5 +1,8 @@
-REFERENCES.md
+# REFERENCES
 
+Quick list of interesting project found on github.com.
+
+######################################################################
 # reports/docs/awesome
 https://github.com/ethen8181/machine-learning
 https://github.com/aymericdamien/TopDeepLearning
@@ -11,6 +14,7 @@ https://github.com/tdeboissiere/DeepLearningImplementations
 https://github.com/Hironsan/awesome-text-classification
 https://github.com/fendouai/Awesome-Text-Classification
 
+######################################################################
 # tutorials/workshops
 https://github.com/aymericdamien/TensorFlow-Examples/tree/master/examples
 https://github.com/ujjwalkarn/Machine-Learning-Tutorials
@@ -19,37 +23,40 @@ https://github.com/ischlag/distributed-tensorflow-example
 https://github.com/mnielsen/neural-networks-and-deep-learning
 https://github.com/minggli/python-ml
 
-
+######################################################################
 # producitvity 
 https://github.com/raviqqe/code2d
 https://chrome.google.com/webstore/detail/code2d/fmbpjfldodgfbmhnbpahimhabjmipojd
 
-
+######################################################################
 # models
 https://github.com/tflearn/models
 https://github.com/tensorflow/models
 
-
+######################################################################
 # kaggle
 https://github.com/imgoodman/kaggle-spark-ml
 https://github.com/imgoodman/machine-learning-with-spark
 https://github.com/daxiongshu/tradeshift-text-classification / https://www.kaggle.com/c/tradeshift-text-classification/data
 https://github.com/minggli/fisheries-convnet
 
+######################################################################
 # video games
 https://github.com/llSourcell/AI_for_video_games_demo
 
+######################################################################
 # chatbots
 https://github.com/carpedm20/fbchat
 https://github.com/llSourcell/tensorflow_chatbot
 https://github.com/minggli/chatbot (doctor)
 
+######################################################################
 # frameworks
 https://github.com/facebookresearch/fastText
 https://github.com/rbgirshick/py-faster-rcnn
 https://github.com/aigamedev/scikit-neuralnetwork
 
-
+######################################################################
 # implementations
 https://github.com/tdeboissiere/DeepLearningImplementations
 https://github.com/hunkim/word-rnn-tensorflow
@@ -65,40 +72,59 @@ https://github.com/yoonkim/CNN_sentence
 https://github.com/smallcorgi/Faster-RCNN_TF
 https://github.com/endernewton/subdiscover
 https://github.com/minggli/DenseNet
+https://github.com/TobiasLee/Text-Classification
 
+######################################################################
 # Deep Reinforcement Learning
 https://github.com/carpedm20/deep-rl-tensorflow
 
-
+######################################################################
 # DGAN - Deep Convolutional Generative Adversarial Networks
 https://github.com/carpedm20/DCGAN-tensorflow
 https://github.com/carpedm20/BEGAN-tensorflow
 https://github.com/carpedm20/DiscoGAN-pytorch
 
+######################################################################
+# code classifier
+https://github.com/toludwig/golden-lemurs
+https://github.com/Top-Ranger/ClassifyHub/blob/master/classifier.py
 
+######################################################################
+# general nlp (word2vec, sparql, rake)
+https://github.com/soeffing/nlp/blob/master/api.go
+
+######################################################################
 # document classification
 Hierarchical Attention Networks for Document Classification: https://github.com/raviqqe/tensorflow-font2char2word2sent2doc 
 https://github.com/fendouai?tab=repositories
 https://github.com/gaussic/text-classification-cnn-rnn
 https://github.com/gaussic/text-classification-pytorch
 https://github.com/yxtay/text-classification-tensorflow
+https://github.com/TobiasLee/Text-Classification
+https://github.com/HaotianMXu/Multimodal-CNNs
 
+######################################################################
 # success prediction
 https://github.com/mbulkow/etsyest
 
+######################################################################
 # document summary
 https://github.com/carpedm20/neural-summary-tensorflow
 
+######################################################################
 # computer vision
 https://github.com/minggli/rainforest-tagging
 
+######################################################################
 # object detection
 https://github.com/xiaolonw/adversarial-frcnn
 https://github.com/llSourcell/YOLO_Object_Detection
 
+######################################################################
 # bounding boxes
 https://github.com/smallcorgi/3D-Deepbox (https://arxiv.org/pdf/1612.00496.pdf)
 
+######################################################################
 # dockerized frameworks / implementations
 https://github.com/jplu/fasttext-for-linking/blob/master/en/Dockerfile
 https://github.com/smizy/docker-gensim/blob/master/Dockerfile
@@ -109,4 +135,5 @@ https://github.com/ambodi/pyspark-twitter-stream-mining
 https://github.com/endernewton/tf-faster-rcnn
 https://github.com/inspirehep/inspire-docker
 https://github.com/inspirehep/inspire-next
+https://github.com/jjangsangy/ExplainToMe (alpine)
 
