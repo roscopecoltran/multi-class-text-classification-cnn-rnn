@@ -65,7 +65,7 @@ def train_cnn_rnn():
 			train_op = optimizer.apply_gradients(grads_and_vars, global_step=global_step)
 
 			# Checkpoint files will be saved in this directory during training
-			checkpoint_dir = './checkpoints_' + timestamp + '/'
+			checkpoint_dir = './shared/results/latest/sf-crime/checkpoints_' + timestamp + '/'
 			if os.path.exists(checkpoint_dir):
 				shutil.rmtree(checkpoint_dir)
 			os.makedirs(checkpoint_dir)
@@ -156,5 +156,5 @@ def train_cnn_rnn():
 		json.dump(params, outfile, indent=4, sort_keys=True, ensure_ascii=False)
 
 if __name__ == '__main__':
-	# python3 train.py ./data/train.csv.zip ./training_config.json
+	# python3 train.py ./shared/data/sf-crime/dataset/train.csv.zip ./shared/data/sf-crime/conf/training_config.json
 	train_cnn_rnn()

@@ -108,5 +108,5 @@ def load_data(filename):
 	return x, y, vocabulary, vocabulary_inv, df, labels
 
 if __name__ == "__main__":
-	train_file = './data/train.csv.zip'
+	train_file = './shared/data/sf-crime/dataset/train.csv.zip'
 	load_data(train_file)
