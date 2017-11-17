@@ -1,0 +1,7 @@
+*.gz
+output
+*/var
+*.txt
+*.ttf
+*.zip
+*.json
