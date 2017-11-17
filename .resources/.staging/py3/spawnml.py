@@ -1,5 +1,6 @@
-from flask import Flask, request, json
+#!/usr/bin/env python3
 
+from flask import Flask, request, json
 import utility
 
 app = Flask(__name__)
