@@ -11,6 +11,12 @@ shared/results/archived/**
 .staging/
 .staging/**
 
+## Golang
+
+vendor
+vendor/
+vendor/**
+
 ## Python
 
 # Byte-compiled / optimized / DLL files
