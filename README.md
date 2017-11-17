@@ -26,8 +26,13 @@
   - Command: python3 predict.py ./trained_results_dir/ new_data.csv
   - Example: ```python3 predict.py ./trained_results_1478563595/ ./data/small_samples.csv```
 
-### Reference:
+### Server:
+  - Command: python3 server.py ./trained_results_dir
+  - Open ``` http://127.0.0.1:5000/ (Press CTRL+C to quit) ```
+
+### References:
  - [Implement a cnn for text classification in tensorflow](http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/)  
+ - See .staging/notes/REFERENCES.md
 
 ## Docker 
 
