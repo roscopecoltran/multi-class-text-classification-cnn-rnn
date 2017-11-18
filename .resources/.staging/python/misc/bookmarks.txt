@@ -1,0 +1,5 @@
+# repositories
+https://github.com/lucapaga/tensorflow-pocs/tree/master/backend-rest
+https://github.com/lucapaga/tensorflow-pocs/tree/master/MY_data
+https://github.com/lucapaga/keras-pocs/tree/master/ml-az-churn-ann
+    https://github.com/lucapaga/keras-pocs/blob/master/ml-az-churn-ann/dataset/Churn_Modelling.csv

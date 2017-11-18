@@ -1,0 +1,17 @@
+---
+classes:
+- general
+- science
+- it
+- videos
+- images
+- music
+- files
+- news
+- social media
+autocomplete:
+- dbpedia
+- duckduckgo
+- google
+- startpage
+- wikipedia

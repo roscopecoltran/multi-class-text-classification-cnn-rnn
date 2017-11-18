@@ -1,0 +1,7 @@
+# repositories
+https://github.com/joscmw95/rank-games/blob/master/scripts/getSuggestedWords.py
+https://github.com/joscmw95/rank-games/blob/master/scripts/getTrendData.py
+https://github.com/ojasviharsola/Scrapper/blob/master/gtrends/gtrends.py
+https://github.com/GeneralMills/pytrends
+https://github.com/mikediamore/Google_Domestic_Trends/blob/master/MultiRNN_Keras.py
+    http://cs229.stanford.edu/proj2015/186_report.pdf

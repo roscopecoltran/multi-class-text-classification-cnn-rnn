@@ -1,0 +1,3 @@
+# repositories
+https://github.com/lincanli/go-pio (prediction.io)
+https://github.com/lincanli/fast-registry

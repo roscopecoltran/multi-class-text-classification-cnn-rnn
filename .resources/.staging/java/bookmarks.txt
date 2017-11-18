@@ -1,0 +1,3 @@
+https://github.com/apache/incubator-predictionio
+https://github.com/apache/incubator-predictionio-template-ecom-recommender
+https://github.com/apache/incubator-predictionio-template-text-classifier

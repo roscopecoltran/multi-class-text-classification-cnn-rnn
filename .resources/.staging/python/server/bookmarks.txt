@@ -1,0 +1,7 @@
+# repositories
+https://github.com/nilbody/cloud-tensorflow
+https://github.com/nilbody/cloud-tensorflow/blob/master/local_platform/run_deploy.py#L74
+https://github.com/HaJaeKwon/tensor_flow/blob/master/example3/models/v2/server.py
+https://github.com/kinni/char-cnn-text-classification-tensorflow/blob/master/serve.py
+https://github.com/zachariah25/csci62
+https://github.com/zachariah25/csci620/blob/master/server/har_lstm_predict.py
