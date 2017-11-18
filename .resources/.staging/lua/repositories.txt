@@ -1,0 +1,2 @@
+https://github.com/zhangxiangxiao/Crepe
+https://github.com/yoonkim/word2vec_torch
