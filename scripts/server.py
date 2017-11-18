@@ -24,6 +24,10 @@
 # https://github.com/Ichaelus/Github-Classifier/blob/master/Application/start.py
 # https://github.com/linkvt/repo-classifier
 # https://github.com/eamonnmag/magpie_web/blob/master/magpie_web.py
+
+# tf api refs:
+# https://github.com/aliostad/wiki-album-genre/blob/8fed753154b3e3744811d0c9eaf0ce1429d89289/album_genre_api.py#L79
+# https://github.com/aiteamwvu/PerfLearner_ML/blob/master/NNtestserver.py
 # 
 
 # commands:
@@ -204,6 +208,7 @@ with tf.Graph().as_default():
 			predictions = sess.run([cnn_rnn.predictions], feed_dict)
 			return predictions
 
+		# restore tensorflow graph
 		checkpoint_file = trained_dir + 'best_model.ckpt'
 		logging.info('checkpoint_file: {}'.format(checkpoint_file))
 		saver = tf.train.Saver(tf.all_variables())
