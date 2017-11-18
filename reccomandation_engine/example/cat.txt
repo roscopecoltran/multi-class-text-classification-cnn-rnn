@@ -1,0 +1,4 @@
+http://13.126.100.211:3000/api/predict_rating?item=10&user=2999
+http://13.126.100.211:3000/api/simillar_user?user=2999
+http://13.126.100.211:3000/api/simillar_item?item=10
+
