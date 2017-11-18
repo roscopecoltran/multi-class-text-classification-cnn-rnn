@@ -1,3 +1,0 @@
-https://github.com/Bmyth/fastTextRead
-https://github.com/Bmyth/text_classification
-https://github.com/evalsocket/tensorflow (lots of different examples)
