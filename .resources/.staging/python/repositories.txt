@@ -7,3 +7,12 @@ https://github.com/johnsmithm/dm/tree/master/tensorflow
 https://github.com/cacheop/wodbot/tree/master/html/api
 https://github.com/cacheop/wodbot/tree/master/notebooks
 https://github.com/sefira/bing_query_title_match
+https://github.com/innerge/MITSummerResearch (ibm watson)
+https://github.com/facebookresearch/fastText
+https://github.com/harvardnlp/sent-conv-torch
+https://github.com/harvardnlp/data2text
+https://github.com/jiegzhan/multi-class-text-classification-cnn-rnn
+https://github.com/brightmart/text_classification
+
+# to test asap
+https://github.com/fatiherikli/klassify
