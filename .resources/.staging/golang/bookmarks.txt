@@ -1,3 +1,9 @@
 # repositories
 https://github.com/lincanli/go-pio (prediction.io)
 https://github.com/lincanli/fast-registry
+https://github.com/HenioJR/file_etl_importer (TOML)
+https://github.com/cpuguy83/go-md2man
+https://github.com/cpuguy83/drax
+https://github.com/arminc/clair-scanner
+https://github.com/allermedia/metl
+
