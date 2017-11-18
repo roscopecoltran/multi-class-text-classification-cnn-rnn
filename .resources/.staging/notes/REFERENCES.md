@@ -25,6 +25,10 @@ https://github.com/donnemartin/data-science-ipython-notebooks
 https://github.com/dmesquita/understanding_tensorflow_nn
 
 ######################################################################
+# vision - logo detection
+https://github.com/fraferra/deepLogo_demo
+
+######################################################################
 # crawlers/spiders
 https://github.com/ViDA-NYU/ache
 

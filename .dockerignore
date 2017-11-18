@@ -2,6 +2,8 @@
 .env-example
 *.md
 
+train.csv*
+
 ## Temporary workspaces
 shared/results/archived
 shared/results/archived/

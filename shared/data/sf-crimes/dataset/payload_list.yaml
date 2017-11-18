@@ -1,0 +1,7 @@
+---
+- category: BURGLARY
+  query: BURGLARY OF STORE, FORCIBLE ENTRY
+- category: SECONDARY CODES
+  query: GANG ACTIVITY
+- category: SUSPICIOUS OCC
+  query: SUSPICIOUS OCCURRENCE

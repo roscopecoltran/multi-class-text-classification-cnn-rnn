@@ -29,6 +29,12 @@ darpa tensorflow
 extractive summarization
 Multi text summary
 
+suggest tags twitter
+suggested tags twitter
+
+hackernews classify
+reddit classify
+reddit tensorflow
 shop tensorflow
 
 bookmarks agregator

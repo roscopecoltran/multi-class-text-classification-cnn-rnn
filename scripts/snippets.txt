@@ -1,0 +1,26 @@
+        test_payload = '''[
+                          {
+                            "Category": "BURGLARY",
+                            "Description": "BURGLARY OF STORE, FORCIBLE ENTRY"
+                          },
+                          {
+                            "Category": "SECONDARY CODES",
+                            "Description": "GANG ACTIVITY"
+                          },
+                          {
+                            "Category": "SUSPICIOUS OCC",
+                            "Description": "SUSPICIOUS OCCURRENCE"
+                          }
+                        ]'''
+
+    test_payload = '''[
+              {
+                "Query": "BURGLARY OF STORE, FORCIBLE ENTRY"
+              },
+              {
+                "Query": "GANG ACTIVITY"
+              },
+              {
+                "Query": "SUSPICIOUS OCCURRENCE"
+              }
+            ]'''

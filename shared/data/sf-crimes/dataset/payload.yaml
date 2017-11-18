@@ -1,0 +1,7 @@
+input:
+- category: BURGLARY
+  description: BURGLARY OF STORE, FORCIBLE ENTRY
+- category: SECONDARY CODES
+  description: GANG ACTIVITY
+- category: SUSPICIOUS OCC
+  description: SUSPICIOUS OCCURRENCE
