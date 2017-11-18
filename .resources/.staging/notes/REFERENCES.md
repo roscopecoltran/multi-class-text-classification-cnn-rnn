@@ -324,6 +324,15 @@ https://github.com/djoerd/identityclassifier2
 https://github.com/vishnuprasadh/cognitiveinsights
 
 ######################################################################
+# word2vec - api
+https://github.com/aliostad/WikiRockWord2Vec/tree/master/data
+https://github.com/aliostad/wiki-album-genre
+
+######################################################################
+# tensorflow - api
+https://github.com/aliostad/deep-learning-lang-detection/blob/master/lang_detect_api.py
+
+######################################################################
 # success prediction
 https://github.com/mbulkow/etsyest
 https://github.com/derekgreene/topic-stability
