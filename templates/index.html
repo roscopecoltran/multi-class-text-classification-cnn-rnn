@@ -1,0 +1,150 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TEST PAGE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- import jQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<style>
+.container{
+	margin: 80px auto;
+	width: 500px;
+}
+#emailpic{
+	width:100px;
+	height:100px;
+	float:left;
+	margin-left:200px;
+}
+#botpic{
+	margin:0 190px;
+}
+#titleText{
+	text-shadow: 2px 2px 2px #898989;
+	margin:10px 160px;
+}
+#content{
+	width: 450px;
+	height: 250px;
+	border:2px solid;
+	border-color: #5B9BD5;
+	border-radius: 30px;
+	padding:20px;
+}
+#submitBtn{
+	background-color: #03BADF;
+	color: #FFFFFF;
+	width: 90px;
+	height: 30px;
+	border-width: 0;
+	border-radius: 10px;
+	float:right;
+}
+.result{
+	transform:scale(1.5,1.5);
+	color: #10D5FC;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$('#submitBtn').click(function(){
+
+		$("#topicTable tr td").removeClass("result");
+		var email = $('#content').val();
+		$.post(
+			'/api',
+			{
+			 input:email,
+		     target:'Logistics - CCR'
+			},
+			function(r){
+			    var topic = r.output[0];
+			    var idtopic = topic.split(" ").join("");
+			    var id = "#" + idtopic;
+				$(id).addClass("result");
+			}
+		);
+	});
+});
+</script>
+<body>
+	<div>
+		<img id="emailpic" src="/static/email.png" alt="email" />
+	</div>
+    <div class="container">
+		<div>
+			<img id="botpic" src="/static/bot.png" alt="bot" />
+		</div>
+		<div>
+			<h1 id="titleText"><span style="color: #C00000;">email</span> bot</h1>
+			<span style="display: inherit;text-align: center;">Input your email content below, click 'Start Test' button</span>
+		</div>
+		<div>
+			<textarea id="content" onfocus="if(value=='Hello eBay:'){value=''}" onblur="if (value ==''){value='Hello eBay:'}">Hello ebay:
+
+I purchased a Hermes Brikin bag(eBay item:252955214689) in eBay last month.And i opened a case stating the bag in counterfeit, Talked with seller but there is no any reponse. I fell that this has been a troublesome and time consuming transaction . Appreciate if you can help resolve this issue.
+
+XXX</textarea>
+		</div>
+		<div class="left">
+			<button id="submitBtn" type="submit">Start Test</button>
+		</div>
+    </div>
+
+	<table id="topicTable" style="margin:0 auto;">
+		<tr>
+			<td id="SpecialtySellingApprovals">
+				<div style="width:70px;height:20px;background-color:#FFCCCC;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">Specialty Selling Approvals</div>
+			</td>
+			<td id="DefectAppeal">
+				<div style="width:70px;height:20px;background-color:#FF66CC;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">Defect Appeal</div>
+			</td>
+			<td id="Logistics-CCR">
+				<div style="width:70px;height:20px;background-color:#D60093;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">Logistics CCR</div>
+			</td>
+			<td id="USBuyingandGeneral">
+				<div style="width:70px;height:20px;background-color:#C5E0B4;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">Buying and General</div>
+			</td>
+			<td id="USM2MAppeals">
+				<div style="width:70px;height:20px;background-color:#A9D18E;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">M2M Appeals</div>
+			</td>
+			<td id="USM2MEscalation">
+				<div style="width:70px;height:20px;background-color:#00FFCC;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">M2M Escalation</div>
+			</td>
+			<td id="USM2MHighASPClaim">
+				<div style="width:70px;height:20px;background-color:#BDD7EE;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">M2M High ASP Claim</div>
+			</td>
+			<td id="USM2MMediation">
+				<div style="width:70px;height:20px;background-color:#00B0F0;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">M2M Mediation</div>
+			</td>
+			<td id="USe2MLimits">
+				<div style="width:70px;height:20px;background-color:#10D5FC;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">e2M Limits</div>
+			</td>
+			<td id="USe2MAccount">
+				<div style="width:70px;height:20px;background-color:#FFD966;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">e2M Account</div>
+			</td>
+			<td id="USe2MVeRO">
+				<div style="width:70px;height:20px;background-color:#FFE699;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">e2M VeRO</div>
+			</td>
+			<td id="SellerRiskManagement">
+				<div style="width:70px;height:20px;background-color:#FFF2CC;margin:0 10px;"></div>
+				<div style="width:70px;height:100px;margin:0 10px;font-size:12px;text-align:center;">Seller Risk Management</div>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
