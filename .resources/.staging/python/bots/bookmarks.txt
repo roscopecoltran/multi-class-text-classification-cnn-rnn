@@ -1,0 +1,12 @@
+# repositories
+https://github.com/hari4171/bot/blob/master/brain/bot.py
+    https://github.com/hari4171/bot/blob/master/data/intents.json
+https://github.com/VaShu/smallBot
+    https://github.com/VaShu/smallBot/blob/master/intents.json
+https://github.com/valcker/contextual-chatbot-tensorflow/blob/master/bot.py
+    https://github.com/valcker/contextual-chatbot-tensorflow/blob/master/intents_french.json
+    https://chatbotsmagazine.com/contextual-chat-bots-with-tensorflow-4391749d0077
+    https://github.com/valcker/contextual-chatbot-tensorflow/blob/master/intents.json
+https://github.com/jhancock1975/overflow-bot/blob/master/src/chatbot-tutorial-part-2.py
+https://github.com/jhancock1975/overflow-bot
+    https://github.com/jhancock1975/overflow-bot/blob/master/bank-intents-json/intents.json

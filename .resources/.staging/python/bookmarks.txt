@@ -1,0 +1,160 @@
+# text classification
+https://github.com/Bmyth/fastTextRead
+https://github.com/Bmyth/text_classification
+https://github.com/evalsocket/tensorflow (lots of different examples)
+https://github.com/jtraviesor/alfred
+https://github.com/jtraviesor/tf-playground (sequence tagging)
+https://github.com/johnsmithm/dm/tree/master/tensorflow
+https://github.com/cacheop/wodbot/tree/master/html/api
+https://github.com/cacheop/wodbot/tree/master/notebooks
+https://github.com/sefira/bing_query_title_match
+https://github.com/innerge/MITSummerResearch (ibm watson)
+https://github.com/facebookresearch/fastText
+https://github.com/harvardnlp/sent-conv-torch
+https://github.com/harvardnlp/data2text
+https://github.com/jiegzhan/multi-class-text-classification-cnn-rnn
+https://github.com/brightmart/text_classification
+https://github.com/dennybritz/cnn-text-classification-tf
+https://github.com/yoonkim/CNN_sentence
+https://github.com/pandagod/textclassifier
+https://github.com/deependersingla/deep_portfolio (time series, rl)
+https://github.com/krayush07/sequential-match-network
+https://github.com/krayush07/cnn-text-classification
+https://github.com/krayush07/utility-codes
+https://github.com/ematvey/hierarchical-attention-networks (yelp)
+    https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf
+    https://www.yelp.com/dataset/challenge
+
+https://github.com/TensorFlowNews/TensorFlow-seq2seq-Examples (twitter)
+https://github.com/SampannaKahu/qna-classifier/blob/master/code/server.py
+https://github.com/atpaino/deep-text-corrector
+
+# products classification / product-classifier
+https://github.com/metalaman/Text_Classification_Using_CNN
+https://github.com/metalaman/Walmart_challenge
+    https://www.hackerrank.com/contests/walmart-codesprint-ml/challenges/products-shelves-tagging
+https://github.com/joshloyal/AmazonProductCategorization/tree/feature_viz
+https://github.com/georgetown-analytics/product-classifier
+https://github.com/sysbm/aws_test (interesting)
+https://github.com/two-tap/product-category-classifier/blob/master/predict.py
+https://github.com/two-tap/product-color-classifier
+https://github.com/sergherrero/eidetic/blob/master/core/vectorize_catalog.py
+
+# webpage classifier
+https://github.com/yuhui-lin/web_page_classification
+    https://github.com/yuhui-lin/web_page_classification/tree/master/models
+https://github.com/neha26shah/WebPageClassification
+https://github.com/bharadwaj221/StructureBasedWebPageClassification
+https://github.com/ezhouyang/class
+https://github.com/TeamHG-Memex/eli5
+https://github.com/roadjiang/memexqa
+
+# Domain Discovery Tool (DDT)
+https://github.com/ViDA-NYU/domain_discovery_tool
+
+# Intel® Nervana™ Graph
+https://github.com/NervanaSystems/ngraph/tree/master/examples
+    http://ngraph.nervanasys.com/docs/latest/
+    http://ngraph.nervanasys.com/docs/latest/tensorflow.html
+
+# web - classify - dmoz
+https://github.com/fabianmurariu/website-categories-nn
+
+# darpa - memex - tools (classifier, crawlers)
+https://github.com/memex-explorer/memex-explorer
+    https://github.com/memex-explorer/HT_text_classifier/blob/master/CP1_text_classification%20vector%20based.ipynb
+https://github.com/memex-explorer/HT-ad-classifiers
+https://github.com/Sotera/**
+https://github.com/Sotera/webpageclassifier (WIKI,BLOG,FORUM,NEWS,CLASSIFIED,SHOPPING)
+
+
+# deep - scraper
+https://github.com/TeamHG-Memex/deep-deep
+
+# scraper - pager tools
+https://github.com/TeamHG-Memex/autopager (for scraper)
+https://github.com/scrapinghub/aile
+
+# flow tasks
+https://github.com/apache/incubator-airflow
+
+# text classification
+https://github.com/yuhui-lin/text-classification
+
+# nearest
+https://github.com/pixelogik/NearPy
+
+# product classify by image
+https://github.com/prakashpandey9/IdentifyProductCategory
+https://github.com/ttakamura/tensorflow-sandbox/tree/master/tab_products
+https://github.com/sujisuraj/Kaggle_cDiscount/blob/master/cDiscount3.py
+
+# product / categories
+https://github.com/miguelmartin/prestashop-change-product-category/blob/master/product_category.py
+https://github.com/mbunse/ArticleCategory/blob/master/GetArticleCategory.py
+
+# product classify / erp
+https://github.com/ApuliaSoftware/product_code_by_category
+
+# search / markdowns
+https://github.com/BernhardWenzel/markdown-search
+
+# google
+https://github.com/BernhardWenzel/google-taxonomy-matcher
+    https://www.bernhardwenzel.com/articles/automatically-matching-category-google-shopping/
+    https://www.google.com/basepages/producttype/taxonomy.en-GB.txt
+
+# nlp
+https://github.com/joshloyal/VecGram
+https://github.com/joshloyal/pydata-amazon-products
+
+# word embedding
+https://github.com/Sen1992/URL_representation/tree/master/lib
+
+# text - summary - extractive summarization
+https://github.com/metalaman/Scripts-for-extractive-summarization
+https://github.com/0zhongying0/Multi-text-summary-paper
+https://github.com/tangzhenyu/nlp_dl
+
+# assistant
+https://github.com/cndn/intelligent-code-completion
+
+# image-caption-generator
+https://github.com/neural-nuts/image-caption-generator
+
+# news
+https://github.com/ishaan007/vector_space_modelling
+https://github.com/ematvey/hierarchical-attention-networks (yelp)
+
+# rl
+https://github.com/coreylynch/async-rl
+https://github.com/awjuliani/DeepRL-Agents
+
+# sentiment analysis
+https://github.com/scottming/EmbeddingCNNintoWeb/blob/master/py/app.py (click, flask)
+
+# document-classification
+https://github.com/ishaan007/vector_space_modelling
+    https://towardsdatascience.com/document-feature-extraction-and-classification-53f0e813d2d3
+    https://raw.githubusercontent.com/ishaan007/vector_space_modelling/master/Code/Data/trainingdata.txt
+https://github.com/kuparez/exercises-classification-2016
+https://github.com/shubhi-sareen/Document-Classification
+https://github.com/hasanfd/doc_classifier_knn
+https://github.com/hasanfd/concurrent_doc_classifier_knn
+https://github.com/Jijunjiang/Document-classification-algorithms-design
+
+# word similarity
+https://github.com/shubhi-sareen/Determining-Similarity-Among-Words
+
+# texts summarizer
+https://github.com/shubhi-sareen/Text-Summarizer
+
+# mail classification
+https://github.com/kuparez/mail-categorization
+
+
+# articles
+http://byterot.blogspot.fr/2015/07/daft-punk-tool-muse-word2vec-model-trained-36K-rock-music-corpus-wiki-NLP-gensim.html
+
+# to test asap
+https://github.com/fatiherikli/klassify

@@ -1,0 +1,6 @@
+# links
+http://kdd.ics.uci.edu/databases/reuters21578/reuters21578.html
+http://www.cs.cornell.edu/people/pabo/movie-review-data/%7D%7D
+http://www.di.unipi.it/~gulli/AG_corpus_of_news_articles.html%7D%7D
+http://qwone.com/~jason/20Newsgroups/%7D%7D
+http://ai.stanford.edu/~amaas/data/sentiment/%7D%7D

@@ -1,0 +1,5 @@
+# repositories
+https://github.com/TensorFlowNews/TensorFlow-seq2seq-Examples
+https://github.com/aliostad/wiki-album-genre
+https://github.com/XefPatterson/INF8225_Project
+    https://github.com/XefPatterson/INF8225_Project/blob/master/test.py

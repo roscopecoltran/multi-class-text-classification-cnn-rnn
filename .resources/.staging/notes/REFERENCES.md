@@ -29,6 +29,14 @@ https://github.com/dmesquita/understanding_tensorflow_nn
 https://github.com/ViDA-NYU/ache
 
 ######################################################################
+# deeplearning - vcs
+https://github.com/0i0/deepme-crawler
+
+######################################################################
+# text - dross domain retrieval
+https://github.com/lijiaman/Cross-domain-Retrieval
+
+######################################################################
 # 2vec
 https://github.com/orenmel/context2vec
 https://github.com/bdhingra/tweet2vec
@@ -66,6 +74,10 @@ https://github.com/kaz-Anova/ensemble_amazon
 https://github.com/derekgreene/topic-ensemble
 
 ######################################################################
+# image classification
+https://github.com/Index01/TensorFlowYolo
+
+######################################################################
 # data science / stack
 https://github.com/amitkaps/full-stack-data-science
 https://github.com/kaz-Anova/StackNet#what-is-stacknet
@@ -74,6 +86,14 @@ https://github.com/kaz-Anova/StackNet#what-is-stacknet
 # Domain Discovery Tool (DDT) 
 https://github.com/ViDA-NYU/domain_discovery_tool
 https://github.com/ViDA-NYU/domain_discovery_API
+
+######################################################################
+# deep - ecommerce
+https://github.com/rpryzant/rakuten_ecommerce
+https://github.com/iamlira/tf/tree/dev
+https://github.com/iamlira/kaggle/blob/master/prep_data.py
+https://github.com/two-tap/product-category-classifier/blob/master/predict.py
+https://github.com/two-tap/product-color-classifier
 
 ######################################################################
 # aggreagtors/meta search engines

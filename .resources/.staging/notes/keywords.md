@@ -24,14 +24,43 @@ multi class twitter NOT sentiment
 multi class tag twitter NOT sentiment
 lda topic models
 
+memex tensorflow
+darpa tensorflow
+extractive summarization
+Multi text summary
+
+shop tensorflow
+
+bookmarks agregator
+bookmarks tensorflow
+
+web page classification
+web page classification kaggle 
+
 santander product recommendation
 tradeshift text classification
 quora question pairs
 home depot product search relevance
 product search relevance
-
+memex tensorflow
 searx gensim
 searx tensorflow
 searx spacy
+products classification 
+product classifier
 
 kaggle steam video games
+google zeitgeist classify
+google trends categories
+google trends csv
+google trends download
+google trends scrape
+
+TensorFlow Product Categorization
+Product Categorization
+
+
+
+hackerrank wallmart
+
+https://trends.google.com/trends/topcharts#date=2015&geo=JP

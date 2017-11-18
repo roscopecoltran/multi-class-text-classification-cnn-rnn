@@ -1,0 +1,3 @@
+package: github.com/roscopecoltran/multi-class-text-classification-cnn-rnn/.staging/golang/go-resty
+import:
+- package: github.com/go-resty/resty

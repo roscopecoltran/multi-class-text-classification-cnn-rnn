@@ -1,0 +1,2 @@
+# repositories
+https://github.com/kinni/char-cnn-text-classification-tensorflow/blob/master/serve.py

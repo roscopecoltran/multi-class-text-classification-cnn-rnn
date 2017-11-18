@@ -1,0 +1,5 @@
+# repositories
+https://github.com/deependersingla/deep_trader
+https://github.com/atpaino/stocktradinganalysis
+https://github.com/tarun160330/CS-6350-Project/tree/master/CS6350_Project-master/data
+https://github.com/philipperemy/stock-volatility-google-trends
