@@ -21,27 +21,20 @@ import pandas as pd
 from functools import wraps
 import argparse
 
-# import spacy
 # import tornado.wsgi
 # import tornado.httpserver
-
 from flask import Flask, jsonify, request, redirect, url_for, send_from_directory, g, render_template
 from flask_cors import CORS, cross_origin
 from flask_json import FlaskJSON, JsonError, json_response
-# from flask_restplus import Api, Resource, fields, marshal_with, reqparse
 
+# from flask_restplus import Api, Resource, fields, marshal_with, reqparse
 from flasgger import Swagger
 from werkzeug import secure_filename
 
-
+# import spacy
 import tensorflow as tf
-
 from text_cnn_rnn import TextCNNRNN
 from sklearn.metrics import precision_score, recall_score, f1_score
-
-import os
-import time
-import datetime
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -68,6 +61,8 @@ def parse_postget(f):
     return wrapper
 
 def web(model, sess):
+
+	# Tensorflow model
 	sess.run(tf.initialize_all_variables())
 	timestamp = trained_dir.split('/')[-2].split('_')[-1]
 	predicted_dir = '../shared/results/latest/sf-crimes/predict/' # _' + timestamp + '/'
@@ -101,9 +96,11 @@ def web(model, sess):
 	CORS(app)
 	swagger = Swagger(app)
 
+	headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
+
 	@app.before_request
 	def before_request():
-		# ref. https://gist.github.com/lost-theory/4521102
+		### ref. https://gist.github.com/lost-theory/4521102
 		# request_start_time = time.time()
 		# g.request_time = lambda: "%.5fs" % (time.time() - request_start_time)
 	    g.request_start_time = time.time()
@@ -113,14 +110,6 @@ def web(model, sess):
 	# @parse_postget
 	@cross_origin()
 	def get_index():
-	    """
-	    Index API, returns "Hello!"
-	    ---
-	    operationId: getPetsById
-	    responses:
-	      200:
-	        description: the word "Hello!"
-	    """
 	    result = {}
 	    result['status'] = 200
 	    result['msg'] = "Hello!"
@@ -136,13 +125,46 @@ def web(model, sess):
 	    result['msg'] = content
 	    return jsonify(result)
 
-		# return jsonify({'result': predicted_results[0]})
+	@app.route('/extract-feedback', methods=['POST'])
+	def extract_feedback():
+	    print request.form
+	    text = request.form.get('text', '')
+	    return redirect('/thanks')
+
+	@app.route('/word2vec', methods=['POST', 'GET'])
+	def word2vec():
+	    if request.method == 'POST':
+	        positive = request.form.get('positive', None)
+	        negative = request.form.get('negative', None)
+
+	        data = {'corpus': 'keywords'}
+	        ctx = {'type': 'word2vec'}
+	        if positive:
+	            data['positive'] = [w.strip() for w in positive.split(',')]
+	            ctx['positive'] = ", ".join(data['positive'])
+	        if negative:
+	            data['negative'] = [w.strip() for w in negative.split(',')]
+	            ctx['negative'] = ", ".join(data['negative'])
+
+	        response = requests.post(WORD2VEC_URL,
+	                                 data=json.dumps(data),
+	                                 headers=headers)
+	        contents = json.loads(response.text)
+
+	        return render_template('brain/results.html', results=contents, ctx=ctx)
+	    else:
+	        return render_template('brain/word2vec.html')
+
+	@app.route('/thanks', methods=['GET'])
+	def thanks():
+	    return render_template('brain/thanks.html')
 
 	# @app.route("/classify", methods=['GET', 'POST'])
 	@app.route("/classify", methods=['GET'])
 	# @parse_postget
 	@cross_origin()
 	def return_score():
+		# to do POST, 
 		#if not request.json or not 'content' in request.json:
 		#    abort(400)
 		content = request.args.get('content')
@@ -182,7 +204,7 @@ def web(model, sess):
 		output["response"]["results"] 		= json.loads(df.to_json(orient = 'records'))
 		output["response"]['response_time'] = g.request_time()
 
-		if y_test is not None: # Accuracy
+		if y_test is not None:
 			y_test = np.array(np.argmax(y_test, axis=1))
 			accuracy = sum(np.array(predictions) == y_test) / float(len(y_test))
 			output["response"]["accuracy"] 	= np.float(accuracy)

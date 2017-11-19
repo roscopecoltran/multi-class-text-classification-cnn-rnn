@@ -9,7 +9,6 @@ app = Flask(__name__)
 
 headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
 
-
 @app.route('/', methods=['POST', 'GET'])
 def extractor():
     if request.method == 'POST':
