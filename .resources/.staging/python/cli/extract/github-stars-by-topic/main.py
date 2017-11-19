@@ -1,42 +1,141 @@
+# core packages
 import datetime
 import getpass
 import logging
 import os
+from os.path import expanduser
 import re
+import sys
+import shutil
+import json
+# import yaml
+import ruamel.yaml
 
+# natural text processing
 import numpy
 import github
 from sklearn.decomposition import NMF
 from sklearn.feature_extraction.text import TfidfVectorizer
+# import pandas as pd
+# import spacy
 
+# load .env file variables
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv(), override=True)
+
+# readme processors
 import readmereader
 
-CACHE_PATH_READMES = 'cache'
+# github settings
+login_or_token          = ""
+password                = ""
+target_account          = ""
+
+# worker params
+get_topics              = False
+github_per_page         = 250
+
+# classifier
+number_of_topics        = 50
+
+# cache default values
+# WORKER_CACHE_DIR        = 'cache'
+cache_prefix_path       = ""
+
+CACHE_DIRNAME_ROOT      = cache_prefix_path
+CACHE_DIRNAME_CONTENT   = 'content'
+CACHE_DIRNAME_CLASSIFY  = 'classify'
+CACHE_DIRNAME_REQUEST   = 'requests'
+CACHE_DIRNAME_GITHUB    = 'github'
 
 def main():
-    number_of_topics = 25
+    g = None
+    login_or_token          = ""
+    password                = ""
+    target_account          = ""
 
-    # username = input('Your Github Username: ')
-    personal_token = getpass.getpass('Your personal token (required to get 5000 request per hour): ')
-    # password = getpass.getpass('Your Password (not stored in any way): ')
+    if os.environ.get('GITHUB_LOGIN_OR_TOKEN') != "":
+        login_or_token = os.environ.get('GITHUB_LOGIN_OR_TOKEN')
+        g = github.Github(login_or_token)
+    elif os.environ.get('GITHUB_API_CLIENT_ID') != "" and os.environ.get('GITHUB_API_CLIENT_SECRET') != "":
+        g = github.Github(client_id=os.environ.get('GITHUB_API_CLIENT_ID'), client_secret=os.environ.get('GITHUB_API_CLIENT_SECRET'))
+    else:
+        login_or_token = input('Your Github Account or Personal Token: ')
+        print('Note:')
+        print('- User\'s password is not stored in any way...')
+        print('- We recommend to use a personal token for authentication.')
+        password = getpass.getpass('Your Github Password: ')
+        g = github.Github(login_or_token, password)
 
-    # gh = github.Github(username, access_token, base_url='https://myorg.github.com/api/v3')
-    g = github.Github(personal_token)
-    g.per_page = 250  # maximum allowed value
+    if os.environ.get('GITHUB_API_PER_PAGE') != "":
+        g.per_page = int(os.environ.get('GITHUB_API_PER_PAGE'))  # maximum allowed value
+    else:
+        g.per_page = github_per_page  # maximum allowed value is 250
 
-    target_username = input('User to analyze: ')
+    if os.environ.get('WORKER_USER_AGENT') != "":
+        g.user_agent = os.environ.get('WORKER_USER_AGENT')
 
-    logging.info('fetching stars')
-    target_user = g.get_user(target_username)
+    if os.environ.get('WORKER_TOPICS_COUNT_MAX') != "":
+        number_of_topics = int(os.environ.get('WORKER_TOPICS_COUNT_MAX'))
+
+    if os.environ.get('GITHUB_API_GET_TOPICS') == "True":
+        get_topics = True
+
+    if os.environ.get('WORKER_TARGET_ACCOUNT') != "":
+        target_account = os.environ.get('WORKER_TARGET_ACCOUNT') 
+    else:
+        target_account = input('Github username to analyze: ')
+
+    if os.environ.get('WORKER_CACHE_DIR') != "":
+        user_home = expanduser("~")
+        cache_prefix_path = os.environ.get('WORKER_CACHE_DIR').replace("~", user_home)
+
+    print('   - cache_prefix_path: ' , cache_prefix_path)
+    if not os.path.isdir(cache_prefix_path) and cache_prefix_path != "":
+        os.makedirs(cache_prefix_path)
+
+    # log info
+    # logging.info("\n - GITHUB INFO:")
+    # logging.info('   - GITHUB_LOGIN_OR_TOKEN: ' + login_or_token)
+    # logging.info('   - GITHUB_API_PER_PAGE: '+ str(g.per_page))
+
+    # logging.info("\n - WORKER INFO:")
+    # logging.info('   - WORKER_TARGET_ACCOUNT: ' + str(target_account))
+
+    print("\n - GITHUB INFO:")
+    print('   - GITHUB_LOGIN_OR_TOKEN: ' , login_or_token)
+    print('   - GITHUB_API_PER_PAGE: ' , str(g.per_page))
+
+    print("\n - WORKER INFO:")
+    print('   - WORKER_TARGET_ACCOUNT: ' , str(target_account))
+
+    # sys.exit('Debug - [END]')
+
+    target_user = g.get_user(target_account)
     repos = target_user.get_starred()
+
+    print('   - WORKER_ITEMS_COUNT: ' , repos.totalCount)    
 
     # setup output directory
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M')
-    output_directory = 'topics_%s_%s' % (target_username, timestamp)
-    os.mkdir(output_directory)
+    output_directory = 'topics/%s/%s' % (target_account, timestamp)
 
-    logging.info('extracts texts for repos (readmes, etc.)')
-    texts, text_index_to_repo = extract_texts_from_repos(repos)
+    if os.path.exists(output_directory):
+        shutil.rmtree(output_directory)
+    os.makedirs(output_directory)
+
+    # create cache folder
+    print('   - TASK_TIMESTAMP: ' , timestamp)
+    print('   - TASK_OUTPUT_DIRECTORY: ' , output_directory)
+    print()
+    print("\n - START:")
+    print('   - extracts texts for repos (readmes, etc.)...')
+
+    if not cache_prefix_path.endswith('/'):
+        cache_prefix_path += '/'
+
+    # logging.info('   - extracts texts for repos (readmes, etc.)...')
+    texts, text_index_to_repo = extract_texts_from_repos(repos, get_topics, cache_prefix_path)
 
     # Classifying
     vectorizer = TfidfVectorizer(max_df=0.2, min_df=2, max_features=1000, stop_words='english', norm='l2',
@@ -48,10 +147,11 @@ def main():
     model = decomposition.fit_transform(vectors)
 
     # generate overview readme
-    overview_text = generate_overview_readme(decomposition, feature_names, target_username)
+    overview_text = generate_overview_readme(decomposition, feature_names, target_account)
 
     # README to get displayed by github when opening directory
     overview_filename = output_directory + os.sep + 'README.md'
+    logging.info('overview_filename: '+ overview_filename)
     with open(overview_filename, 'w') as overview_file:
         overview_file.write(overview_text)
 
@@ -120,36 +220,67 @@ def generate_overview_readme(decomposition, feature_names, username):
     return text
 
 
-def extract_texts_from_repos(repos):
+def extract_texts_from_repos(repos, get_topics, cache_prefix_path):
     readmes = []
     readme_to_repo = {}  # maps readme index to repo
 
+    # print(" #### PaginatedList KEYS: ", repos._PaginatedList__totalCount)
+    # print(" #### repos sub-count: ",  repos.length)
+    print('   - WORKER_ITEMS_COUNT: ' , repos.totalCount)   
+    # dict_keys(['_PaginatedListBase__elements', '_PaginatedList__requester', '_PaginatedList__contentClass', '_PaginatedList__firstUrl', '_PaginatedList__firstParams', '_PaginatedList__nextUrl', '_PaginatedList__nextParams', '_PaginatedList__headers', '_PaginatedList__list_item', '_reversed', '_PaginatedList__totalCount'])
+    # logging.info('   - extract_texts_from_repos count: '+ len(repos))
+
     for repo in repos:
-        full_repo_text = get_text_for_repo(repo)
+        full_repo_text = get_text_for_repo(repo, get_topics, cache_prefix_path)
         readme_to_repo[len(readmes)] = repo
         readmes.append(full_repo_text)
 
     return readmes, readme_to_repo
 
 
-def get_text_for_repo(repo):
+def get_text_for_repo(repo, get_topics, cache_prefix_path):
+
     repo_login, repo_name = repo.full_name.split('/')  # use full name to infer user login
 
-    # readme = readmereader.fetch_readme(user_login, repo_name, repo.id)
-    readme = readmereader.fetch_readme(repo)
-    readme_text = readmereader.markdown_to_text(readme)
-    # topics = repo.topics
+    cache_prefix = cache_prefix_path + str(repo.full_name) + os.sep + 'repository.api-v3.' + str(repo.id)
+    logging.info('   - cache_prefix: ' , cache_prefix)
 
+    readme = readmereader.fetch_readme(repo, cache_prefix_path)
+    # readme = readmereader.fetch_readme(user_login, repo_name, repo.id)
+    readme_text = readmereader.markdown_to_text(readme)
     repo_name_clean = re.sub(r'[^A-z]+', ' ', repo_name)
+
+    if not os.path.isfile(cache_prefix + '.yaml'):
+        with open(cache_prefix + '.yaml', 'w') as outfile:
+            # yaml.safe_dump(repo.raw_data, outfile, default_flow_style=False)
+            ruamel.yaml.safe_dump(repo.raw_data, outfile, default_flow_style=False)
+
+
+    if not os.path.isfile(cache_prefix + '.json'):
+        with open(cache_prefix + '.json', 'w') as outfile:
+            json.dump(repo.raw_data, outfile, sort_keys=True, indent=4, separators=(',', ': '))
+
+    print("---> repo.topics: " , str(repo.topics))
+    print(repo.topics)
+
+    repo_topics = ""
+    if get_topics:
+        if repo.topics is not None:
+            repo_topics = str(', '.join(repo.topics))
+            logging.info('   - repo_topics: '+ repo_topics)
+        else:
+            logging.info('   - repo_topics: [NOT_AVAILABLE]')
 
     texts = [
         str(repo.description),
         str(repo.description),
         str(repo.description),  # use description 3x to increase weight
         str(repo.language),
+        str(repo_topics),
         readme_text,
         repo_name_clean
     ]
+
     return ' '.join(texts)
 
 

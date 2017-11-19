@@ -1,8 +1,6 @@
 import numpy as np
 import tensorflow as tf
 
-
-# ref. https://github.com/jamesmw423/multi-class-text-classification-cnn-rnn/commit/ab56a1fb9749f0ca17cab006030974113a3d96c3
 class TextCNNRNN(object):
 	def __init__(self, embedding_mat, non_static, hidden_unit, sequence_length, max_pool_size,
 		num_classes, embedding_size, filter_sizes, num_filters, l2_reg_lambda=0.0):
@@ -84,12 +82,6 @@ class TextCNNRNN(object):
 			b = tf.Variable(tf.constant(0.1, shape=[num_classes]), name='b')
 			l2_loss += tf.nn.l2_loss(W)
 			l2_loss += tf.nn.l2_loss(b)
-			
-			# ref. https://github.com/jamesmw423/multi-class-text-classification-cnn-rnn/commit/ab56a1fb9749f0ca17cab006030974113a3d96c3
-			self.logits = tf.nn.xw_plus_b(output, self.W, b)
-			self.probs = tf.nn.softmax(self.logits)
-			self.probabilities = tf.argmax(self.probs, 1, name='probabilities')
-
 			self.scores = tf.nn.xw_plus_b(output, self.W, b, name='scores')
 			self.predictions = tf.argmax(self.scores, 1, name='predictions')
 

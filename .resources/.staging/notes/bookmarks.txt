@@ -4,3 +4,5 @@ https://github.com/terryum/awesome-deep-learning-papers
 # datasets 
 https://github.com/usametov/gitmarks
 
+# tutorials
+https://github.com/harman666666/Algorithms-Data-Structures-and-Design

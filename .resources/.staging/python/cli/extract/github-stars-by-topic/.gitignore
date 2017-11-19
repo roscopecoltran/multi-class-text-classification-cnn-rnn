@@ -5,3 +5,7 @@ cache/
 
 # Output folders of program
 topics_*/
+
+.env
+
+*.pyc

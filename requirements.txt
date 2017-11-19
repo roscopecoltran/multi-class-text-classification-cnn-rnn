@@ -10,3 +10,12 @@ six>=1.10.0
 pandas
 numpy
 werkzeug
+pytrends
+flasgger
+tornado
+flask_cors
+extruct
+dateparser
+webstruct
+flask_json
+flask_restplus

@@ -1,112 +1,296 @@
-import tensorflow as tf
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# ref. https://github.com/JoshGlue/RU-TextMining/blob/master/web.py
+# report: https://github.com/prabh-me/multi-class-text-classification-cnn-rnn/commit/8c087ec93f105906f0eaedae3f4f9fc4b72865a7
+# run: cd scripts && python3 web.py ../shared/results/latest/sf-crimes/trained_results_1510012745
+
+import os
+import sys
+import json
+import time
+import datetime
+import base64
+import ruamel.yaml
+import shutil
+import pickle
+import logging
+import data_helper
 import numpy as np
+import pandas as pd
+from functools import wraps
+import argparse
+
+# import spacy
+# import tornado.wsgi
+# import tornado.httpserver
+
+from flask import Flask, jsonify, request, redirect, url_for, send_from_directory, g, render_template
+from flask_cors import CORS, cross_origin
+from flask_json import FlaskJSON, JsonError, json_response
+# from flask_restplus import Api, Resource, fields, marshal_with, reqparse
+
+from flasgger import Swagger
+from werkzeug import secure_filename
+
+
+import tensorflow as tf
+
+from text_cnn_rnn import TextCNNRNN
+from sklearn.metrics import precision_score, recall_score, f1_score
+
 import os
 import time
 import datetime
-import data_helpers
-from text_cnn import TextCNN
-from tensorflow.contrib import learn
-from flask import Flask, request
+
+logging.getLogger().setLevel(logging.INFO)
+
 app = Flask(__name__)
-
-# Data loading params
-tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
-tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
-tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the positive data.")
-
-# Model Hyperparameters
-tf.flags.DEFINE_integer("embedding_dim", 128, "Dimensionality of character embedding (default: 128)")
-tf.flags.DEFINE_string("filter_sizes", "3,4,5", "Comma-separated filter sizes (default: '3,4,5')")
-tf.flags.DEFINE_string("author", "Kleef", "Part of the name of the author")
-tf.flags.DEFINE_integer("num_filters", 128, "Number of filters per filter size (default: 128)")
-tf.flags.DEFINE_float("dropout_keep_prob", 0.5, "Dropout keep probability (default: 0.5)")
-tf.flags.DEFINE_float("l2_reg_lambda", 0.0, "L2 regularizaion lambda (default: 0.0)")
-
-# Training parameters
-tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-tf.flags.DEFINE_integer("num_epochs", 200, "Number of training epochs (default: 200)")
-tf.flags.DEFINE_integer("evaluate_every", 100, "Evaluate model on dev set after this many steps (default: 100)")
-tf.flags.DEFINE_integer("checkpoint_every", 100, "Save model after this many steps (default: 100)")
-# Misc Parameters
-tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
-tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
-
-FLAGS = tf.flags.FLAGS
-FLAGS._parse_flags()
-
-
 author = "M.L."
 
+def print_tf_flags():
+	FLAGS = tf.flags.FLAGS
+	FLAGS._parse_flags()
+	print("\nParameters:")
+	for attr, value in sorted(FLAGS.__flags.items()):
+	     print("{}={}".format(attr.upper(), value))
+	print("")
 
-def web(cnn, sess, vocab_processor):
-    sess.run(tf.initialize_all_variables())
-    out_dir = os.path.abspath(os.path.join(os.path.curdir, "runs", author))
-    checkpoint_dir = os.path.abspath(os.path.join(out_dir, "checkpoints"))
-    ckpt = tf.train.get_checkpoint_state(checkpoint_dir)
-    saver = tf.train.Saver(tf.all_variables())
-    if ckpt and ckpt.model_checkpoint_path:
-        saver.restore(sess, ckpt.model_checkpoint_path)
-        print("Checkpoint restored.")
-    else:
-        print("No checkpoint found.")
+def parse_postget(f):
+    @wraps(f)
+    def wrapper(*args, **kw):
+        try:
+            d = dict((key, request.values.getlist(key) if len(request.values.getlist(
+                key)) > 1 else request.values.getlist(key)[0]) for key in request.values.keys())
+        except BadRequest as e:
+            raise Exception("Payload must be a valid json. {}".format(e))
+        return f(d)
+    return wrapper
 
+def web(model, sess):
+	sess.run(tf.initialize_all_variables())
+	timestamp = trained_dir.split('/')[-2].split('_')[-1]
+	predicted_dir = '../shared/results/latest/sf-crimes/predict/' # _' + timestamp + '/'
+	if os.path.exists(predicted_dir):
+		shutil.rmtree(predicted_dir)
+	os.makedirs(predicted_dir)
 
-    app = Flask(__name__)
+	checkpoint_file = trained_dir + 'best_model.ckpt'
+	saver = tf.train.Saver(tf.global_variables())
+	saver = tf.train.import_meta_graph("{}.meta".format(checkpoint_file))
+	saver.restore(sess, checkpoint_file)
+	logging.info('{} has been loaded'.format(checkpoint_file))
 
-    @app.route("/")
-    def hello():
-        return "Hello World!"
+	# api service
+	app = Flask(__name__)
+	# app = Flask(__name__, static_url_path='')
+	UPLOAD_FOLDER = '../shared/uploads'
+	ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'csv', 'json', 'yaml', 'yml'])
+	# app.secret_key = 'super_secret_key'
+	app.config['RESTPLUS_MASK_SWAGGER'] = False
+	app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+	app.config.SWAGGER_UI_DOC_EXPANSION = 'list'
+	# app.config['APPLICATION_ROOT'] = '/' + options.api_namespace
+    # api = Api(app, version='0.3', title='COMRADES Event API',
+    #          description='A set of tools for analysing short textual documents (e.g. tweets).',
+    #          doc='/' + options.api_namespace + '/',
+    #          endpoint='/' + options.api_namespace
+    #          )
+    # ns = api.namespace(options.api_namespace,
+    #                   description='Event detection tools.')
+	CORS(app)
+	swagger = Swagger(app)
 
-    @app.route("/score", methods=['GET', 'POST'])
-    def return_score():
-        input = request.args.get('text')
-        input = [input]
+	@app.before_request
+	def before_request():
+		# ref. https://gist.github.com/lost-theory/4521102
+		# request_start_time = time.time()
+		# g.request_time = lambda: "%.5fs" % (time.time() - request_start_time)
+	    g.request_start_time = time.time()
+	    g.request_time = lambda: "%.5fs" % (time.time() - g.request_start_time)
 
-        input = [data_helpers.clean_str(sent) for sent in input]
+	@app.route('/', methods=['GET'])
+	# @parse_postget
+	@cross_origin()
+	def get_index():
+	    """
+	    Index API, returns "Hello!"
+	    ---
+	    operationId: getPetsById
+	    responses:
+	      200:
+	        description: the word "Hello!"
+	    """
+	    result = {}
+	    result['status'] = 200
+	    result['msg'] = "Hello!"
+	    return jsonify(result)
 
-        x = np.array(list(vocab_processor.fit_transform(input)))
-        return str(dev_step(x)[0])
+	@app.route('/predict', methods=['POST'])
+	def predict():
+	    if not request.json or not 'content' in request.json:
+	        abort(400)
+	    content = request.json['content']
+	    result = {}
+	    result['status'] = 200
+	    result['msg'] = content
+	    return jsonify(result)
 
-    def dev_step(x_batch):
-        """
-        Evaluates model on a dev set
-        """
+		# return jsonify({'result': predicted_results[0]})
 
-        y = np.array([1], dtype=np.float32)
-        feed_dict = {
-            cnn.input_x: x_batch,
-            cnn.input_y: y,
-            cnn.dropout_keep_prob: 1.0
-        }
-        scores = sess.run(
-            [cnn.scores],
-            feed_dict)
+	# @app.route("/classify", methods=['GET', 'POST'])
+	@app.route("/classify", methods=['GET'])
+	# @parse_postget
+	@cross_origin()
+	def return_score():
+		#if not request.json or not 'content' in request.json:
+		#    abort(400)
+		content = request.args.get('content')
+		payload = '[{"query": "' + content + '"}]'
 
-        return scores[0]
+		x_, y_, df = load_payload_data(payload, labels)
+		x_ = data_helper.pad_sentences(x_, forced_sequence_length=params['sequence_length'])
+		x_ = map_word_to_index(x_, words_index)
+		x_test, y_test = np.asarray(x_), None
+		if y_ is not None:
+			y_test = np.asarray(y_)
 
-    app.run()
+		batches = data_helper.batch_iter(list(x_test), params['batch_size'], 1, shuffle=False)
+		predictions, predict_labels, predict_scores = [], [], []
 
+		for x_batch in batches:
+			prediction_output = predict_step(x_batch)
+			batch_predictions = prediction_output[0][0]
+			max_probs = prediction_output[1]
+			for batch_prediction in batch_predictions:
+				predictions.append(batch_prediction)
+				predict_labels.append(labels[batch_prediction])
+			for batch_score in max_probs:
+				predict_scores.append(batch_score)
 
+		df['score'] = predict_scores
+		df['match'] = predict_labels			
+		columns = sorted(df.columns, reverse=True)
+
+		output = {}
+		output["request"] = {}
+		output["request"]["params"] 		= params			
+		output["request"]["content"] 		= content
+		output["request"]["payload"] 		= payload			
+
+		output["response"] = {}
+		output["response"]["results"] 		= json.loads(df.to_json(orient = 'records'))
+		output["response"]['response_time'] = g.request_time()
+
+		if y_test is not None: # Accuracy
+			y_test = np.array(np.argmax(y_test, axis=1))
+			accuracy = sum(np.array(predictions) == y_test) / float(len(y_test))
+			output["response"]["accuracy"] 	= np.float(accuracy)
+
+		result = {}
+		result['status'] = 200
+		result['output'] = output
+		return jsonify(result)
+
+	def real_len(batches):
+		return [np.ceil(np.argmin(batch + [0]) * 1.0 / params['max_pool_size']) for batch in batches]
+
+	def predict_step(x_batch):
+		feed_dict = {
+			model.input_x: x_batch,
+			model.dropout_keep_prob: 1.0,
+			model.batch_size: len(x_batch),
+			model.pad: np.zeros([len(x_batch), 1, params['embedding_dim'], 1]),
+			model.real_len: real_len(x_batch),
+		}
+		predictions = sess.run([model.predictions], feed_dict)
+		probs = (sess.run([model.probs], feed_dict))[0]
+		max_probs = [np.max(x) for x in probs]
+		return [predictions, max_probs]
+
+	def load_payload_data(payload, labels):
+		print("payload: ", payload)
+		df = pd.read_json(payload)
+		select = ['query']
+		df = df.dropna(axis=0, how='any', subset=select)
+		test_examples = df[select[0]].apply(lambda x: data_helper.clean_str(x).split(' ')).tolist()
+		num_labels = len(labels)
+		logging.info('labels: {}'.format(labels))
+		logging.info('num_labels: {}'.format(num_labels))
+		
+		one_hot = np.zeros((num_labels, num_labels), int)
+		np.fill_diagonal(one_hot, 1)
+		label_dict = dict(zip(labels, one_hot))
+
+		y_ = None
+		if 'Category' in df.columns:
+			select.append('Category')
+			y_ = df[select[1]].apply(lambda x: label_dict[x]).tolist()
+
+		not_select = list(set(df.columns) - set(select))
+		df = df.drop(not_select, axis=1)
+		return test_examples, y_, df
+
+    # app.run()
+	# server_port = int(os.getenv('SERVER_PORT', 8000))
+	# app.run(use_debugger=True, use_reloader=True)
+	app.run(host='0.0.0.0', port=8000, threaded=True, debug=True)
+
+logging.getLogger().setLevel(logging.INFO)
+
+def parse_postget(f):
+    @wraps(f)
+    def wrapper(*args, **kw):
+        try:
+            d = dict((key, request.values.getlist(key) if len(request.values.getlist(
+                key)) > 1 else request.values.getlist(key)[0]) for key in request.values.keys())
+        except BadRequest as e:
+            raise Exception("Payload must be a valid json. {}".format(e))
+        return f(d)
+    return wrapper
+
+def map_word_to_index(examples, words_index):
+	x_ = []
+	for example in examples:
+		temp = []
+		for word in example:
+			if word in words_index:
+				temp.append(words_index[word])
+			else:
+				temp.append(0)
+		x_.append(temp)
+	return x_
+
+def load_trained_params(trained_dir):
+	params = json.loads(open(trained_dir + 'trained_parameters.json').read())
+	words_index = json.loads(open(trained_dir + 'words_index.json').read())
+	labels = json.loads(open(trained_dir + 'labels.json').read())
+	with open(trained_dir + 'embeddings.pickle', 'rb') as input_file:
+		fetched_embedding = pickle.load(input_file)
+	embedding_mat = np.array(fetched_embedding, dtype = np.float32)
+	return params, words_index, labels, embedding_mat
+
+# load model
+trained_dir = sys.argv[1]
+if not trained_dir.endswith('/'):
+	trained_dir += '/'
+params, words_index, labels, embedding_mat = load_trained_params(trained_dir) # load_trained_params
+
+# load graph
 with tf.Graph().as_default():
-    session_conf = tf.ConfigProto(
-        allow_soft_placement=True,
-        log_device_placement=False)
-    sess = tf.Session(config=session_conf)
-    x_text, y = data_helpers.load_data_and_labels(author)
-    y = np.array(y, dtype=np.float32)
-    # Build vocabulary
-    listwords = [len(x.split(" ")) for x in x_text]
-    max_document_length = max(listwords)
-    vocab_processor = learn.preprocessing.VocabularyProcessor(max_document_length)
-    x = np.array(list(vocab_processor.fit_transform(x_text)))
-    with sess.as_default():
-        cnn = TextCNN(
-            sequence_length=max_document_length,
-            num_classes=1,
-            vocab_size=len(vocab_processor.vocabulary_),
-            embedding_size=FLAGS.embedding_dim,
-            filter_sizes=list(map(int, FLAGS.filter_sizes.split(","))),
-            num_filters=FLAGS.num_filters,
-            l2_reg_lambda=FLAGS.l2_reg_lambda)
+	session_conf = tf.ConfigProto(allow_soft_placement=True, log_device_placement=False)
+	sess = tf.Session(config=session_conf)
+	with sess.as_default():
+		model = TextCNNRNN(
+			embedding_mat = embedding_mat,
+			non_static = params['non_static'],
+			hidden_unit = params['hidden_unit'],				
+			sequence_length = params['sequence_length'],
+			max_pool_size = params['max_pool_size'],
+			filter_sizes = map(int, params['filter_sizes'].split(",")),
+			num_filters = params['num_filters'],
+			num_classes = len(labels),
+			embedding_size = params['embedding_dim'],
+			l2_reg_lambda = params['l2_reg_lambda'])
+		web(model, sess)
 
-        web(cnn,sess,vocab_processor)

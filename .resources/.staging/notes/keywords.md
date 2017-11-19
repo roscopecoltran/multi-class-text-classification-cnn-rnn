@@ -24,6 +24,61 @@ multi class twitter NOT sentiment
 multi class tag twitter NOT sentiment
 lda topic models
 
+Deep Learning for Extreme Multi-label Text Classification
+Extreme Multi-label Text Classification
+
+sequence_length TextCNNRNN
+tf.Graph sequence_length flask
+predict_unseen_data flask
+
+arxiv tensorflow language:Python
+
+arxiv tensorflow multi label language:Python
+
+text_cnn_rnn tensorflow
+
+text mining tensorflow
+web classifier tensorflow
+
+news topic modeling
+news topic tensorflow
+
+Jingzhou Liu
+Wei-Cheng Chang
+Yuexin Wu
+Yiming Yang
+Carnegie Mellon Univerity
+http://nyc.lti.cs.cmu.edu/yiming/Publications/jliu-sigir17.pdf
+https://openreview.net/forum?id=YDXrDdbom9YCi
+Large-scale Multi-label Text Classification - Revisiting Neural Networks
+Jinseok Nam, Jungi Kim, Iryna Gurevych, Johannes Fürnkranz
+
+Large Scale Multi-label Text Classification with Semantic Word Vectors
+Multi-label Text Classification 
+Multi-label Text Classification with Semantic Word Vectors
+Ensemble Application of Convolutional and Recurrent Neural Networks for Multi-label Text Categorization
+
+Multi-label Text Categorization
+    http://sentic.net/convolutional-and-recurrent-neural-networks-for-text-categorization.pdf
+# Guibin Chen, Deheng Ye, Zhenchang Xing, Jieshan Chen, Erik Cambria1
+# CONCEPT EXTRACTION
+
+sigmoid = independent
+softmax = exclusive
+https://www.reddit.com/r/MachineLearning/comments/3spm6d/multilabel_convolutional_neural_networks_w_label/
+https://groups.google.com/forum/#!topic/caffe-users/RuT1TgwiRCo
+Multi-Label Neural Networks with Applications to
+Functional Genomics and Text Categorization
+https://cs224d.stanford.edu/reports/BergerMark.pdf
+Berger Mark
+multi-label-classification
+
+https://www.slideshare.net/JanStypka/magpie-63516040
+https://github.com/jstypka?tab=repositories
+https://github.com/inveniosoftware
+https://github.com/jstypka/magpie_web
+
+
 memex tensorflow
 darpa tensorflow
 extractive summarization

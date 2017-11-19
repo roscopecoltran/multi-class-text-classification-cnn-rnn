@@ -25,6 +25,10 @@ https://github.com/donnemartin/data-science-ipython-notebooks
 https://github.com/dmesquita/understanding_tensorflow_nn
 
 ######################################################################
+# social media
+https://github.com/bear/python-twitter
+
+######################################################################
 # vision - logo detection
 https://github.com/fraferra/deepLogo_demo
 
@@ -35,6 +39,18 @@ https://github.com/ViDA-NYU/ache
 ######################################################################
 # deeplearning - vcs
 https://github.com/0i0/deepme-crawler
+
+######################################################################
+# deep - event extraction
+https://github.com/evhart/crees
+
+######################################################################
+# deep - ocr
+https://github.com/one-leaf/tensorflow/blob/master/6/1/web.py
+
+######################################################################
+# named entity recogonize
+https://github.com/StephenLee2016/named_entity_recogonize/blob/master/api.py
 
 ######################################################################
 # text - dross domain retrieval
@@ -98,6 +114,16 @@ https://github.com/iamlira/tf/tree/dev
 https://github.com/iamlira/kaggle/blob/master/prep_data.py
 https://github.com/two-tap/product-category-classifier/blob/master/predict.py
 https://github.com/two-tap/product-color-classifier
+https://github.com/LaVieEnRoux/SneakerNet
+
+######################################################################
+# scrapers - pages / images
+https://github.com/hardikvasa/google-images-download
+https://github.com/hardikvasa/webb
+
+######################################################################
+# predict / ratings
+https://github.com/jinangela/IMDB_movie
 
 ######################################################################
 # aggreagtors/meta search engines
@@ -156,6 +182,7 @@ https://github.com/felipessalvatore/MyTwitterBot
 https://github.com/kobykotiv/DeepBird
 https://github.com/michaelsterpka/RootyAI
 https://github.com/MiuLab/KB-InfoBot
+https://github.com/JoshGlue/CCMLWI_Chatbot
 
 ######################################################################
 # news feed
@@ -194,10 +221,18 @@ https://github.com/smallcorgi/Faster-RCNN_TF
 https://github.com/endernewton/subdiscover
 https://github.com/minggli/DenseNet
 https://github.com/TobiasLee/Text-Classification
+https://github.com/salestock/fastText.py
+https://github.com/dcap76/powerAI
+
+######################################################################
+# node2vec
+https://github.com/summatic/node2vec
 
 ######################################################################
 # Deep Reinforcement Learning
 https://github.com/carpedm20/deep-rl-tensorflow
+https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow
+https://github.com/MorvanZhou/Evolutionary-Algorithm
 
 ######################################################################
 # DGAN - Deep Convolutional Generative Adversarial Networks
@@ -244,6 +279,10 @@ https://github.com/daxiongshu/kaggle-review
 https://www.kaggle.com/c/tradeshift-text-classification
 https://www.kaggle.com/c/tradeshift-text-classification/data
 https://www.kaggle.com/c/quora-question-pairs/data
+https://github.com/kiyotaka-tanaka/text_classification/blob/master/classification_mecab/predict.py
+https://github.com/kiyotaka-tanaka/text_classification/tree/master/classification_jumanpp
+https://github.com/kiyotaka-tanaka/classification_mecab
+https://github.com/summatic/mldl-sandbox/blob/master/char_level_cnn_rnn/run_model.py
 
 ######################################################################
 # kaggle - Quora Question Pairs
@@ -342,6 +381,11 @@ https://github.com/Top-Ranger/ClassifyHub/blob/master/Doxyfile
 https://github.com/toludwig/golden-lemurs/blob/master/classification/Training.py
 https://github.com/samshipengs/Twitter-Topic-Classification
 https://github.com/djoerd/identityclassifier2
+https://github.com/122689305/FuturesPrediction
+https://github.com/mdaniluk/challenge/tree/master
+https://github.com/malkieler/docai/blob/master/core.py
+https://github.com/BaiJingting/multi_class_text_classify/blob/master/CNN_RNN/process/data_helper.py
+https://github.com/manish181192/CNN_text_classifier_Tensorflow/blob/master/API.py
 
 ######################################################################
 # e-commerce - data science
@@ -366,6 +410,8 @@ https://github.com/derekgreene/topic-stability
 https://github.com/carpedm20/neural-summary-tensorflow
 https://github.com/surmenok/TextSum
 https://github.com/jinfagang/tensorflow_extractor
+https://github.com/122689305/YelpSummarization/tree/master/NltkMaxentPosTaggerApplication
+
 
 ######################################################################
 # QA
@@ -379,6 +425,10 @@ https://github.com/minggli/rainforest-tagging
 # object detection
 https://github.com/xiaolonw/adversarial-frcnn
 https://github.com/llSourcell/YOLO_Object_Detection
+
+######################################################################
+# arxiv - mining
+https://github.com/prabh-me/Arxiv-Trends
 
 ######################################################################
 # bounding boxes

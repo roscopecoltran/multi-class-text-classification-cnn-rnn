@@ -3,3 +3,4 @@ requests
 Markdown
 scikit-learn
 bs4
+dotenv

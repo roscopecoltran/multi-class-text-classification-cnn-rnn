@@ -145,7 +145,9 @@ def test_model(input_content="", input_type='payload', labels=[]):
 
 def predict_process(x_batch):
 	checkpoint_file = trained_dir + 'best_model.ckpt'
-	saver = tf.train.Saver(tf.all_variables())
+	# ref. https://github.com/gallupliu/text_matching_tensorflow/blob/master/multi-class-text-classification-cnn-rnn/report.txt 
+	# old: saver = tf.train.Saver(tf.all_variables())
+	saver = tf.train.Saver(tf.global_variables())
 	saver = tf.train.import_meta_graph("{}.meta".format(checkpoint_file))
 	saver.restore(sess, checkpoint_file)
 	logging.info('{} has been loaded'.format(checkpoint_file))

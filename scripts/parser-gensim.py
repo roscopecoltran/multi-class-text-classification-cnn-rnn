@@ -1,21 +1,17 @@
-import os
+#coding:utf-8
 import re
-import sys
-import json
-import pickle
 import logging
 import itertools
 import numpy as np
 import pandas as pd
 import gensim as gs
-from pprint import pprint
 from collections import Counter
-from tensorflow.contrib import learn
 
 logging.getLogger().setLevel(logging.INFO)
 
 def clean_str(s):
-	s = re.sub(r"[^A-Za-z0-9:(),!?\'\`]", " ", s)
+	#s = re.sub(r"[^A-Za-z0-9:(),!?\'\`]", " ", s)
+	s = re.sub(r"[0-9:()]", " ", s)
 	s = re.sub(r" : ", ":", s)
 	s = re.sub(r"\'s", " \'s", s)
 	s = re.sub(r"\'ve", " \'ve", s)
@@ -33,8 +29,14 @@ def clean_str(s):
 
 def load_embeddings(vocabulary):
 	word_embeddings = {}
+	#json格式的 word：向量
+	model = gs.models.Word2Vec.load("./data/vec")
 	for word in vocabulary:
-		word_embeddings[word] = np.random.uniform(-0.25, 0.25, 300)
+		if word in model.wv.vocab:
+			word_embeddings[word] = model.wv[word].astype(np.float32)
+		else:
+			word_embeddings[word] = np.random.uniform(-0.25, 0.25, 300)
+		# word_embeddings[word] = np.random.uniform(-0.25, 0.25, 300)
 	return word_embeddings
 
 def pad_sentences(sentences, padding_word="<PAD/>", forced_sequence_length=None):
@@ -42,9 +44,9 @@ def pad_sentences(sentences, padding_word="<PAD/>", forced_sequence_length=None)
 	if forced_sequence_length is None: # Train
 		sequence_length = max(len(x) for x in sentences)
 	else: # Prediction
-		logging.info('This is prediction, reading the trained sequence length')
+		logging.critical('This is prediction, reading the trained sequence length')
 		sequence_length = forced_sequence_length
-	logging.info('The maximum length is {}'.format(sequence_length))
+	logging.critical('The maximum length is {}'.format(sequence_length))
 
 	padded_sentences = []
 	for i in range(len(sentences)):
@@ -83,8 +85,8 @@ def batch_iter(data, batch_size, num_epochs, shuffle=True):
 			yield shuffled_data[start_index:end_index]
 
 def load_data(filename):
-	df = pd.read_csv(filename, compression='zip')
-	selected = ['Category', 'Description']
+	df = pd.read_csv(filename, sep='|', encoding="utf-8")
+	selected = ['Category', 'Descript']
 	non_selected = list(set(df.columns) - set(selected))
 
 	df = df.drop(non_selected, axis=1)
@@ -97,7 +99,7 @@ def load_data(filename):
 	np.fill_diagonal(one_hot, 1)
 	label_dict = dict(zip(labels, one_hot))
 
-	x_raw= df[selected[1]].apply(lambda x: clean_str(x).split(' ')).tolist()
+	x_raw= df[selected[1]].apply(lambda x: clean_str(x).split()).tolist()
 	y_raw = df[selected[0]].apply(lambda y: label_dict[y]).tolist()
 
 	x_raw = pad_sentences(x_raw)
@@ -108,5 +110,6 @@ def load_data(filename):
 	return x, y, vocabulary, vocabulary_inv, df, labels
 
 if __name__ == "__main__":
-	train_file = './shared/data/sf-crimes/dataset/train.csv.zip'
-	load_data(train_file)
+	#train_file = './data/small_train.zip'
+	#load_data(train_file)
+	1+1

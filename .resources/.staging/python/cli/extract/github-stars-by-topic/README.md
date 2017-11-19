@@ -4,6 +4,11 @@ This is a python script that fetches your GitHub stars and uses Machine Learning
 
 The result can be viewed in the [example folder](example/).
 
+## Dependencies
+```bash
+pip3 install -r requirements.txt
+```
+
 ## Usage
 
 Just run `python3 main.py` on the command line. It will ask you for your GitHub credentials to fetch your stars and then do its job. The result will be a folder in the main directory that you can copy or save in a GitHub repository for others to browse.
