@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+<<<<<<< HEAD
 # -*- coding: utf-8 -*-
 
 # report: https://github.com/prabh-me/multi-class-text-classification-cnn-rnn/commit/8c087ec93f105906f0eaedae3f4f9fc4b72865a7
@@ -11,12 +12,18 @@ import datetime
 import base64
 
 import ruamel.yaml
+=======
+import os
+import sys
+import json
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 import shutil
 import pickle
 import logging
 import data_helper
 import numpy as np
 import pandas as pd
+<<<<<<< HEAD
 import spacy
 import tornado.wsgi
 import tornado.httpserver
@@ -117,6 +124,13 @@ def load_graph(graph_filename):
 
     return graph
 
+=======
+import tensorflow as tf
+from text_cnn_rnn import TextCNNRNN
+
+logging.getLogger().setLevel(logging.INFO)
+
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 def load_trained_params(trained_dir):
 	params = json.loads(open(trained_dir + 'trained_parameters.json').read())
 	words_index = json.loads(open(trained_dir + 'words_index.json').read())
@@ -127,6 +141,7 @@ def load_trained_params(trained_dir):
 	embedding_mat = np.array(fetched_embedding, dtype = np.float32)
 	return params, words_index, labels, embedding_mat
 
+<<<<<<< HEAD
 def map_word_to_index(examples, words_index):
 	x_ = []
 	for example in examples:
@@ -143,10 +158,16 @@ def load_test_data(test_file, labels):
 	print("test_file: ", test_file)
 	df = pd.read_csv(test_file, sep='|')
 	select = ['Description']
+=======
+def load_test_data(test_file, labels):
+	df = pd.read_csv(test_file, sep='|')
+	select = ['Descript']
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 
 	df = df.dropna(axis=0, how='any', subset=select)
 	test_examples = df[select[0]].apply(lambda x: data_helper.clean_str(x).split(' ')).tolist()
 
+<<<<<<< HEAD
 	# https://stackoverflow.com/questions/15943769/how-do-i-get-the-row-count-of-a-pandas-dataframe
 	# count_row=df.shape[0] # gives number of row count
 	# count_col=df.shape[1] # gives number of col count
@@ -156,6 +177,8 @@ def load_test_data(test_file, labels):
 	# len(df.columns)  
 	print("df length: ", len(df['Description']))
 
+=======
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 	num_labels = len(labels)
 	logging.info('labels: {}'.format(labels))
 	logging.info('num_labels: {}'.format(num_labels))
@@ -173,6 +196,7 @@ def load_test_data(test_file, labels):
 	df = df.drop(not_select, axis=1)
 	return test_examples, y_, df
 
+<<<<<<< HEAD
 def load_payload_data(payload, labels):
 	# print("payload: ", payload)
 	# df = pd.read_json(json.loads(payload))
@@ -226,37 +250,77 @@ def predict_unseen_data():
 	x_ = data_helper.pad_sentences(x_, forced_sequence_length=params['sequence_length'])
 	x_ = map_word_to_index(x_, words_index)
 	# print("[AFTER] x_: ", x_)
+=======
+def map_word_to_index(examples, words_index):
+	x_ = []
+	for example in examples:
+		temp = []
+		for word in example:
+			if word in words_index:
+				temp.append(words_index[word])
+			else:
+				temp.append(0)
+		x_.append(temp)
+	return x_
+
+def predict_unseen_data():
+	trained_dir = sys.argv[1]
+	if not trained_dir.endswith('/'):
+		trained_dir += '/'
+	test_file = sys.argv[2]
+
+	params, words_index, labels, embedding_mat = load_trained_params(trained_dir)
+	x_, y_, df = load_test_data(test_file, labels)
+	x_ = data_helper.pad_sentences(x_, forced_sequence_length=params['sequence_length'])
+	x_ = map_word_to_index(x_, words_index)
+
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 	x_test, y_test = np.asarray(x_), None
 	if y_ is not None:
 		y_test = np.asarray(y_)
 
+<<<<<<< HEAD
 	# print("[AFTER] x_test: ", x_test)
 	# print("[AFTER] y_test: ", y_test)
 
 	timestamp = trained_dir.split('/')[-2].split('_')[-1]
 	predicted_dir = '../shared/results/latest/sf-crimes/predict/' # _' + timestamp + '/'
+=======
+	timestamp = trained_dir.split('/')[-2].split('_')[-1]
+	predicted_dir = './shared/results/latest/sf-crimes/predicted_' + timestamp + '/'
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 	if os.path.exists(predicted_dir):
 		shutil.rmtree(predicted_dir)
 	os.makedirs(predicted_dir)
 
 	# refs.
 	# - https://stackoverflow.com/questions/33759623/tensorflow-how-to-save-restore-a-model
+<<<<<<< HEAD
 	# - with probs: https://github.com/jamesmw423/multi-class-text-classification-cnn-rnn/commit/33a5883455fd6b75b966de523bcd240d2fefe9ac
+=======
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 	with tf.Graph().as_default():
 		session_conf = tf.ConfigProto(allow_soft_placement=True, log_device_placement=False)
 		sess = tf.Session(config=session_conf)
 		with sess.as_default():
+<<<<<<< HEAD
 			# sf-crimes_small.csv, sequence_length = 14
 			# payload, sequence_length = 14
 			sequence_length = len(x_test[0])
 			print("sequence_length: " , sequence_length)
 			sys.exit('sequence_length debug')
+=======
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 			cnn_rnn = TextCNNRNN(
 				embedding_mat = embedding_mat,
 				non_static = params['non_static'],
 				hidden_unit = params['hidden_unit'],
+<<<<<<< HEAD
 				sequence_length = params['sequence_length'],
 				# sequence_length = len(x_test[0]),
+=======
+				sequence_length = len(x_test[0]),
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 				max_pool_size = params['max_pool_size'],
 				filter_sizes = map(int, params['filter_sizes'].split(",")),
 				num_filters = params['num_filters'],
@@ -267,6 +331,7 @@ def predict_unseen_data():
 			def real_len(batches):
 				return [np.ceil(np.argmin(batch + [0]) * 1.0 / params['max_pool_size']) for batch in batches]
 
+<<<<<<< HEAD
 			# https://github.com/zackhy/TextClassification/blob/master/cnn_classifier.py
 			# 
 			# def predict_step(x_batch):
@@ -276,6 +341,9 @@ def predict_unseen_data():
 			def predict_step(x_batch):
 				# correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 				# accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+=======
+			def predict_step(x_batch):
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 				feed_dict = {
 					cnn_rnn.input_x: x_batch,
 					cnn_rnn.dropout_keep_prob: 1.0,
@@ -283,6 +351,7 @@ def predict_unseen_data():
 					cnn_rnn.pad: np.zeros([len(x_batch), 1, params['embedding_dim'], 1]),
 					cnn_rnn.real_len: real_len(x_batch),
 				}
+<<<<<<< HEAD
 				# ['input_x', 'input_y', 'dropout_keep_prob', 'batch_size', 'pad', 'real_len', 'embedded_chars', '_initial_state', 'W', 'scores', 'predictions', 'loss', 'accuracy', 'num_correct']
 				# print(" #### CNN_RNN KEYS: ", cnn_rnn.__dict__.keys())
 				predictions = sess.run([cnn_rnn.predictions], feed_dict)
@@ -293,11 +362,19 @@ def predict_unseen_data():
 			checkpoint_file = trained_dir + 'best_model.ckpt'
 			# old: saver = tf.train.Saver(tf.all_variables())
 			saver = tf.train.Saver(tf.global_variables())
+=======
+				predictions = sess.run([cnn_rnn.predictions], feed_dict)
+				return predictions
+
+			checkpoint_file = trained_dir + 'best_model.ckpt'
+			saver = tf.train.Saver(tf.all_variables())
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 			saver = tf.train.import_meta_graph("{}.meta".format(checkpoint_file))
 			saver.restore(sess, checkpoint_file)
 			logging.info('{} has been loaded'.format(checkpoint_file))
 
 			batches = data_helper.batch_iter(list(x_test), params['batch_size'], 1, shuffle=False)
+<<<<<<< HEAD
 			results = []
 			predictions, predict_labels, predict_scores = [], [], []
 			# https://github.com/pranaypourkar/Blind_Assistive_Device/blob/master/label_image1.py
@@ -360,10 +437,24 @@ def predict_unseen_data():
 			output["response"]["details"] = json.loads(df.to_json(orient = 'records'))
 			output["response"]["results"] = results
 			output["response"]["log_path"] = predicted_dir			
+=======
+
+			predictions, predict_labels = [], []
+			for x_batch in batches:
+				batch_predictions = predict_step(x_batch)[0]
+				for batch_prediction in batch_predictions:
+					predictions.append(batch_prediction)
+					predict_labels.append(labels[batch_prediction])
+
+			df['PREDICTED'] = predict_labels
+			columns = sorted(df.columns, reverse=True)
+			df.to_csv(predicted_dir + 'predictions_all.csv', index=False, columns=columns, sep='|')
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 
 			if y_test is not None:
 				y_test = np.array(np.argmax(y_test, axis=1))
 				accuracy = sum(np.array(predictions) == y_test) / float(len(y_test))
+<<<<<<< HEAD
 				output["response"]["accuracy"] = np.float(accuracy)
 				logging.info('The prediction accuracy is: {}'.format(accuracy))
 
@@ -526,4 +617,12 @@ def api():
 # docker: https://github.com/Vetal1977/tf_serving_flask_app/blob/master/docker-compose.yaml
 if __name__ == '__main__':
 	# api()
+=======
+				logging.critical('The prediction accuracy is: {}'.format(accuracy))
+
+			logging.critical('Prediction is complete, all files have been saved: {}'.format(predicted_dir))
+
+if __name__ == '__main__':
+	# python3 predict.py ./shared/results/latest/sf-crimes/trained ./shared/data/sf-crimes/dataset/small_samples.csv
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 	predict_unseen_data()

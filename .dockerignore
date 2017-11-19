@@ -2,8 +2,11 @@
 .env-example
 *.md
 
+<<<<<<< HEAD
 train.csv*
 
+=======
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 ## Temporary workspaces
 shared/results/archived
 shared/results/archived/

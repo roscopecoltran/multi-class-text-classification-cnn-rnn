@@ -9,6 +9,7 @@ future>=0.16.0
 six>=1.10.0
 pandas
 numpy
+<<<<<<< HEAD
 werkzeug
 pytrends
 flasgger
@@ -19,3 +20,6 @@ dateparser
 webstruct
 flask_json
 flask_restplus
+=======
+werkzeug
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a

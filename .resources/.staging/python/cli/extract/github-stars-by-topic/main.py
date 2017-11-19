@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 # core packages
+=======
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 import datetime
 import getpass
 import logging
 import os
+<<<<<<< HEAD
 from os.path import expanduser
 import re
 import sys
@@ -12,10 +16,15 @@ import json
 import ruamel.yaml
 
 # natural text processing
+=======
+import re
+
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 import numpy
 import github
 from sklearn.decomposition import NMF
 from sklearn.feature_extraction.text import TfidfVectorizer
+<<<<<<< HEAD
 # import pandas as pd
 # import spacy
 
@@ -136,6 +145,37 @@ def main():
 
     # logging.info('   - extracts texts for repos (readmes, etc.)...')
     texts, text_index_to_repo = extract_texts_from_repos(repos, get_topics, cache_prefix_path)
+=======
+
+import readmereader
+
+CACHE_PATH_READMES = 'cache'
+
+def main():
+    number_of_topics = 25
+
+    # username = input('Your Github Username: ')
+    personal_token = getpass.getpass('Your personal token (required to get 5000 request per hour): ')
+    # password = getpass.getpass('Your Password (not stored in any way): ')
+
+    # gh = github.Github(username, access_token, base_url='https://myorg.github.com/api/v3')
+    g = github.Github(personal_token)
+    g.per_page = 250  # maximum allowed value
+
+    target_username = input('User to analyze: ')
+
+    logging.info('fetching stars')
+    target_user = g.get_user(target_username)
+    repos = target_user.get_starred()
+
+    # setup output directory
+    timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M')
+    output_directory = 'topics_%s_%s' % (target_username, timestamp)
+    os.mkdir(output_directory)
+
+    logging.info('extracts texts for repos (readmes, etc.)')
+    texts, text_index_to_repo = extract_texts_from_repos(repos)
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 
     # Classifying
     vectorizer = TfidfVectorizer(max_df=0.2, min_df=2, max_features=1000, stop_words='english', norm='l2',
@@ -147,11 +187,18 @@ def main():
     model = decomposition.fit_transform(vectors)
 
     # generate overview readme
+<<<<<<< HEAD
     overview_text = generate_overview_readme(decomposition, feature_names, target_account)
 
     # README to get displayed by github when opening directory
     overview_filename = output_directory + os.sep + 'README.md'
     logging.info('overview_filename: '+ overview_filename)
+=======
+    overview_text = generate_overview_readme(decomposition, feature_names, target_username)
+
+    # README to get displayed by github when opening directory
+    overview_filename = output_directory + os.sep + 'README.md'
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
     with open(overview_filename, 'w') as overview_file:
         overview_file.write(overview_text)
 
@@ -220,6 +267,7 @@ def generate_overview_readme(decomposition, feature_names, username):
     return text
 
 
+<<<<<<< HEAD
 def extract_texts_from_repos(repos, get_topics, cache_prefix_path):
     readmes = []
     readme_to_repo = {}  # maps readme index to repo
@@ -232,12 +280,21 @@ def extract_texts_from_repos(repos, get_topics, cache_prefix_path):
 
     for repo in repos:
         full_repo_text = get_text_for_repo(repo, get_topics, cache_prefix_path)
+=======
+def extract_texts_from_repos(repos):
+    readmes = []
+    readme_to_repo = {}  # maps readme index to repo
+
+    for repo in repos:
+        full_repo_text = get_text_for_repo(repo)
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
         readme_to_repo[len(readmes)] = repo
         readmes.append(full_repo_text)
 
     return readmes, readme_to_repo
 
 
+<<<<<<< HEAD
 def get_text_for_repo(repo, get_topics, cache_prefix_path):
 
     repo_login, repo_name = repo.full_name.split('/')  # use full name to infer user login
@@ -270,17 +327,34 @@ def get_text_for_repo(repo, get_topics, cache_prefix_path):
             logging.info('   - repo_topics: '+ repo_topics)
         else:
             logging.info('   - repo_topics: [NOT_AVAILABLE]')
+=======
+def get_text_for_repo(repo):
+    repo_login, repo_name = repo.full_name.split('/')  # use full name to infer user login
+
+    # readme = readmereader.fetch_readme(user_login, repo_name, repo.id)
+    readme = readmereader.fetch_readme(repo)
+    readme_text = readmereader.markdown_to_text(readme)
+    # topics = repo.topics
+
+    repo_name_clean = re.sub(r'[^A-z]+', ' ', repo_name)
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 
     texts = [
         str(repo.description),
         str(repo.description),
         str(repo.description),  # use description 3x to increase weight
         str(repo.language),
+<<<<<<< HEAD
         str(repo_topics),
         readme_text,
         repo_name_clean
     ]
 
+=======
+        readme_text,
+        repo_name_clean
+    ]
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
     return ' '.join(texts)
 
 

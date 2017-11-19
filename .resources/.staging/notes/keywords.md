@@ -24,6 +24,7 @@ multi class twitter NOT sentiment
 multi class tag twitter NOT sentiment
 lda topic models
 
+<<<<<<< HEAD
 Deep Learning for Extreme Multi-label Text Classification
 Extreme Multi-label Text Classification
 
@@ -79,17 +80,22 @@ https://github.com/inveniosoftware
 https://github.com/jstypka/magpie_web
 
 
+=======
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 memex tensorflow
 darpa tensorflow
 extractive summarization
 Multi text summary
 
+<<<<<<< HEAD
 suggest tags twitter
 suggested tags twitter
 
 hackernews classify
 reddit classify
 reddit tensorflow
+=======
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 shop tensorflow
 
 bookmarks agregator

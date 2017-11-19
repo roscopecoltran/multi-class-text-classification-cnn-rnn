@@ -2,5 +2,9 @@ PyGithub
 requests
 Markdown
 scikit-learn
+<<<<<<< HEAD
 bs4
 dotenv
+=======
+bs4
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a

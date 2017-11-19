@@ -2,7 +2,11 @@
 https://github.com/terryum/awesome-deep-learning-papers
 
 # datasets 
+<<<<<<< HEAD
 https://github.com/usametov/gitmarks
 
 # tutorials
 https://github.com/harman666666/Algorithms-Data-Structures-and-Design
+=======
+https://github.com/usametov/gitmarks
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a

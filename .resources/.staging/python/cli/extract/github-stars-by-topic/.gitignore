@@ -4,8 +4,12 @@ __pycache__/
 cache/
 
 # Output folders of program
+<<<<<<< HEAD
 topics_*/
 
 .env
 
 *.pyc
+=======
+topics_*/
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a

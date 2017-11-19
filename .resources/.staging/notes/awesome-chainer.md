@@ -36,6 +36,10 @@ ref [Chainer.wiki](https://github.com/pfnet/chainer/wiki) - Chainer Wiki
 *   [iwiwi/chainer-handson](https://github.com/iwiwi/chainer-handson/blob/master/chainer-ja.ipynb) - Chainer Hands-on(JP CPU only)
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 301605969ead13f36611301c9a96ef1cbaa8477a
 <a name="github-projects" />
 
 ## Models/Projects
